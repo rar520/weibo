@@ -1,6 +1,10 @@
 <template>
 <<<<<<< HEAD
   <div id="app">
+<<<<<<< HEAD
+=======
+    <!-- <img src="./assets/logo.png"> -->
+>>>>>>> airuo.ruan
     <router-view/>
   </div>
 =======

@@ -16,6 +16,7 @@ var store=new Vuex.Store({
   }
 })
 import App from './App'
+<<<<<<< HEAD
 // import router from './router'
 // 导入Mint-ui包 需要使用Mint-ui中的懒加载图标的把其全局导入
 import Mint from 'mint-ui'
@@ -35,10 +36,21 @@ import router from './router/index.js'
 import '../static/mui/css/mui.css'
 import '../static/mui/css/icons-extra.css'
 import '../static/css/common.css'
+=======
+import router from './router'
+import '../static/css/common.css'
+import '../static/mui/css/mui.css'
+import '../static/mui/css/icons-extra.css'
+>>>>>>> airuo.ruan
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> airuo.ruan
 
 Vue.config.productionTip = false
 

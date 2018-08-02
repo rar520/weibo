@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import before_login from '@/components/login/before_login.vue'
 import login from '@/components/login/login.vue'
 import register from '@/components/login/register.vue'
@@ -12,6 +13,9 @@ import TextbodyContainer from '@/components/content/textbody.vue'
 import Comment from '@/components/subcomponent/comment.vue'
 import CommentInfo from '@/components/content/commentinfo.vue'
 >>>>>>> huan.zhang
+=======
+import notify from '@/components/notify/notify.vue'
+>>>>>>> airuo.ruan
 
 Vue.use(Router)
 
@@ -23,6 +27,7 @@ export default new Router({
     //   component: HelloWorld
     // }
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
       path: '/before_login',
       name: 'before_login',
@@ -66,6 +71,11 @@ export default new Router({
       name: 'commentinfo',
       component: CommentInfo
 >>>>>>> huan.zhang
+=======
+      path: '/notify',
+      name: 'notify',
+      component: notify
+>>>>>>> airuo.ruan
     }
 
   ]
