@@ -37,7 +37,6 @@ export default{
 </script>
 
 <style scoped>
-/* @import '../../../static/css/common.css'; */
 div{
     padding-top:20vh;
 }
