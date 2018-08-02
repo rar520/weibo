@@ -3,6 +3,7 @@ import Router from 'vue-router'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import before_login from '@/components/login/before_login.vue'
 import login from '@/components/login/login.vue'
 import register from '@/components/login/register.vue'
@@ -22,6 +23,12 @@ import search from '@/components/search/search.vue'
 import bill from '@/components/search/bill.vue'
 import searchpage from '@/components/search/searchpage.vue'
 >>>>>>> ke.wang
+=======
+import Follow from '@/components/personal/follow.vue'
+import Personal from '@/components/personal/personal.vue'
+import Fans from '@/components/personal/fans.vue'
+import Data from '@/components/personal/data.vue'
+>>>>>>> xin.Hu
 
 Vue.use(Router)
 
@@ -33,6 +40,7 @@ export default new Router({
     //   component: HelloWorld
     // }
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -98,6 +106,26 @@ export default new Router({
       name: 'searchpage',
       component: searchpage
 >>>>>>> ke.wang
+=======
+      path: '/follow',
+      name: 'follow',
+      component: Follow
+    },
+    {
+      path: '/personal',
+      name: 'personal',
+      component: Personal
+    },
+    {
+      path:'/fans',
+      name:'fans',
+      component:Fans
+    },
+    {
+      path:'/data',
+      name:'data',
+      component:Data
+>>>>>>> xin.Hu
     }
 
   ]

@@ -63,6 +63,10 @@ import '../static/mui/css/icons-extra.css'
 Vue.use(MintUI)
 >>>>>>> ke.wang
 
+import '../static/css/common.css'
+import '../static/mui/css/mui.css'
+import '../static/mui/css/icons-extra.css'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
