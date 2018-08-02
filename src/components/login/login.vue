@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style scoped>
-  @import '../../../static/css/common.css';
+  /* @import '../../../static/css/common.css'; */
   div{
     font-family:楷体;
     padding-top:30%;

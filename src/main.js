@@ -4,8 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import '../static/css/mui.css'
-import '../static/css/icons-extra.css'
+import '../static/mui/css/mui.css'
+import '../static/mui/css/icons-extra.css'
+import '../static/css/common.css'
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'

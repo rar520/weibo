@@ -45,7 +45,7 @@ export default{
 </script>
 
 <style scpoed>
- @import '../../../static/css/common.css';
+ /* @import '../../../static/css/common.css'; */
  header{
     width:100%;
     height:8vh;

@@ -4,6 +4,8 @@
             <span class="mui-icon mui-icon-closeempty"></span>
         </router-link>
         <div class="origin_head">
+            <!-- <img src=''>
+            <input type="file" name="image"> -->
             <span class="mui-icon mui-icon-contact"></span>
         </div>
         <form action="">
@@ -23,10 +25,19 @@ export default{
         }
     }
 }
+// var x = new FileReader;
+// 		document.forms[0].elements[0].onchange = function(){
+// 			x.readAsDataURL(this.files[0]);
+// 			console.log("onchange触发");
+// 		}
+// 		x.onloadend = function(){
+// 			document.images[0].src = this.result;
+// 			console.log("onloadend触发");
+// 		}
 </script>
 
 <style scoped>
-@import '../../../static/css/common.css';
+/* @import '../../../static/css/common.css'; */
 div{
     padding-top:20vh;
 }

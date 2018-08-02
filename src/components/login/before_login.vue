@@ -6,7 +6,8 @@
         </header>
         <main>
             <div class="content_bg">
-                <img src="../../../static/img/origin_head.png">
+                <!-- <img src="../../../static/img/origin_head.png"> -->
+                <span class="mui-icon mui-icon-contact"></span>
             </div>
             <p>登陆后，你的微博、相册、个人资料<br/>会展示在这里，显示给别人</p>
             <div class="login_register">
@@ -61,7 +62,7 @@ export default {
 </script>
 
 <style scoped>
-@import '../../../static/css/common.css';
+/* @import '../../../static/css/common.css'; */
 div:nth-of-type(1){
     background-color:#efe8e8;
     height:100vh;
@@ -92,14 +93,15 @@ main .content_bg{
     background-position:center;
     position:relative;
 }
-main img{
-    width:18%;
-    height:10vh;
+main div:nth-of-type(1) span{
+    width:55px;
+    height:55px;
     position:absolute;
-    top:17vh;
+    font-size:55px;
+    top:50%;
     left:50%;
-    margin-top:-5vh;
-    margin-left:-9%;
+    margin-top:-22px;
+    margin-left:-22px;
 }
 main p{
     font-size:20px;
