@@ -7,66 +7,78 @@
       <div class="content">
         <ul>
           <li>
-            <div class="up">
-              <div class="img"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
-              <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>评论了你的微博</div>
-              <div>嗨喽，大家好。我很高兴</div>
-            </div>
+            <router-link to="">
+              <div class="up">
+                <div class="img"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
+                <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>评论了你的微博</div>
+                <div>嗨喽，大家好。我很高兴</div>
+              </div>
+            </router-link>
             <div class="down">
               <span>7-13</span>
               <span class="mui-icon-extra mui-icon-extra-like"></span>
             </div>
           </li>
           <li>
-            <div class="up">
-              <div><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
-              <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>评论了<router-link to="" style="color:#0941f7">若水</router-link>的微博</div>
-              <div>嗨喽，大家好。我很高兴</div>
-            </div>
+            <router-link to="">
+              <div class="up">
+                <div><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
+                <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>评论了<router-link to="" style="color:#0941f7">若水</router-link>的微博</div>
+                <div>嗨喽，大家好。我很高兴</div>
+              </div>
+            </router-link>
             <div class="down">
               <span>7-13</span>
               <span class="mui-icon-extra mui-icon-extra-like"></span>
             </div>
           </li>
           <li>
-            <div class="up">
-              <div><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
-              <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>等9人点赞了你</div>
-              <div><img src="../../../static/img/zan.png" width="50px" height="50px"></div>
-            </div>
+            <router-link to="">
+              <div class="up">
+                <div><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
+                <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>等9人点赞了你</div>
+                <div><img src="../../../static/img/zan.png" width="50px" height="50px"></div>
+              </div>
+            </router-link>
             <div class="down">
               <span>7-13</span>
               <span class="mui-icon-extra mui-icon-extra-like"></span>
             </div>
           </li>
           <li>
-            <div class="up">
-              <div class="img"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
-              <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>评论了你的微博</div>
-              <div>嗨喽，大家好。我很高兴</div>
-            </div>
+            <router-link to="">
+              <div class="up">
+                <div class="img"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
+                <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>评论了你的微博</div>
+                <div>嗨喽，大家好。我很高兴</div>
+              </div>
+            </router-link>
             <div class="down">
               <span>7-13</span>
               <span class="mui-icon-extra mui-icon-extra-like"></span>
             </div>
           </li>
           <li>
-            <div class="up">
-              <div><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
-              <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>评论了<router-link to="" style="color:#0941f7">若水</router-link>的微博</div>
-              <div>嗨喽，大家好。我很高兴</div>
-            </div>
+            <router-link to="">
+              <div class="up">
+                <div><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
+                <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>评论了<router-link to="" style="color:#0941f7">若水</router-link>的微博</div>
+                <div>嗨喽，大家好。我很高兴</div>
+              </div>
+            </router-link>
             <div class="down">
               <span>7-13</span>
               <span class="mui-icon-extra mui-icon-extra-like"></span>
             </div>
           </li>
           <li>
-            <div class="up">
-              <div><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
-              <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>等9人点赞了你</div>
-              <div><img src="../../../static/img/zan.png" width="50px" height="50px"></div>
-            </div>
+            <router-link to="">
+              <div class="up">
+                <div><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></div>
+                <div><router-link to="" style="color:#0941f7">小天鹅-</router-link>等9人点赞了你</div>
+                <div><img src="../../../static/img/zan.png" width="50px" height="50px"></div>
+              </div>
+            </router-link>
             <div class="down">
               <span>7-13</span>
               <span class="mui-icon-extra mui-icon-extra-like"></span>
@@ -142,12 +154,6 @@ export default {
   height: 15vh;
   position:relative;
 }
-.content ul li .down{
-  height: 5vh;
-  position:relative;
-  border-bottom: 1px solid gray;
-
-}
 .content ul li .up div:nth-child(1){
   width: 55px;
   height: 55px;
@@ -164,6 +170,12 @@ export default {
   height: 15vh;
   float: right;
 }
+.content ul li .down{
+  height: 5vh;
+  position:relative;
+  border-bottom: 1px solid gray;
+
+}
 .content ul li .down span:nth-child(1){
   position:absolute;
   left:25%;
@@ -174,6 +186,9 @@ export default {
   right:5%;
   bottom: 2vh;
   color:gray;
+}
+.content ul li .down span:nth-child(2).hover{
+  color:yellow;
 }
 .footer{
   width:100%;
