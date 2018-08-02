@@ -38,6 +38,7 @@ import '../static/mui/css/icons-extra.css'
 import '../static/css/common.css'
 =======
 import router from './router'
+<<<<<<< HEAD
 import '../static/css/common.css'
 import '../static/mui/css/mui.css'
 import '../static/mui/css/icons-extra.css'
@@ -51,6 +52,16 @@ Vue.use(MintUI)
 
 
 >>>>>>> airuo.ruan
+=======
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+import '../static/css/common.css'
+import '../static/mui/css/mui.css'
+import '../static/mui/css/mui.min.css'
+import '../static/mui/css/icons-extra.css'
+
+Vue.use(MintUI)
+>>>>>>> ke.wang
 
 Vue.config.productionTip = false
 

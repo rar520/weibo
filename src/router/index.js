@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import before_login from '@/components/login/before_login.vue'
 import login from '@/components/login/login.vue'
 import register from '@/components/login/register.vue'
@@ -16,6 +17,11 @@ import CommentInfo from '@/components/content/commentinfo.vue'
 =======
 import notify from '@/components/notify/notify.vue'
 >>>>>>> airuo.ruan
+=======
+import search from '@/components/search/search.vue'
+import bill from '@/components/search/bill.vue'
+import searchpage from '@/components/search/searchpage.vue'
+>>>>>>> ke.wang
 
 Vue.use(Router)
 
@@ -27,6 +33,7 @@ export default new Router({
     //   component: HelloWorld
     // }
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       path: '/before_login',
@@ -76,6 +83,21 @@ export default new Router({
       name: 'notify',
       component: notify
 >>>>>>> airuo.ruan
+=======
+      path: '/search',
+      name: 'search',
+      component: search
+    },
+    {
+      path: '/bill',
+      name: 'bill',
+      component: bill
+    },
+    {
+      path: '/searchpage',
+      name: 'searchpage',
+      component: searchpage
+>>>>>>> ke.wang
     }
 
   ]
