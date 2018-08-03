@@ -132,7 +132,7 @@ export default {
   }
 }
 </script>
-<style scope>
+<style scoped>
 .header{
   width: 100%;
   height: 8vh;
