@@ -1,7 +1,7 @@
 <template>
     <div style="padding-top:8vh;">
       <div class="header">
-        <span>通知</span>
+        <p>通知</p>
 
       </div>
       <div class="content">
@@ -132,16 +132,20 @@ export default {
   }
 }
 </script>
-<style scope>
+<style scoped>
 .header{
   width: 100%;
   height: 8vh;
   margin-bottom: 1vh;
-  line-height: 8vh;
   position: fixed;
   top: 0;
   z-index:99;
   background-color: white;
+}
+.header p{
+  color: black;
+  text-align: center;
+  line-height: 8vh;
 }
 .content{
   width: 100%;
@@ -159,6 +163,7 @@ export default {
   height: 55px;
   float: left;
   border-radius: 50%;
+  overflow: hidden;
 }
 .content ul li .up div:nth-child(2){
   position: absolute;
@@ -202,8 +207,11 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.footer li{
+.footer ul li{
   width: 20%;
   height:8vh;
+}
+.footer ul li p{
+  text-align: center;
 }
 </style>
