@@ -1,9 +1,9 @@
 <template>
     <div>
         <header>
+            <p>正在编辑</p>
+            <p>soda</p>
             <span>返回</span>
-            <span>正在编辑</span>
-            <span>soda</span>
             <div>
                 发送
             </div>
@@ -49,29 +49,26 @@ export default{
  header{
     width:100%;
     height:8vh;
-    padding-top:4vh;
+    /* padding-top:4vh; */
     position:relative;
     background-color:#f9f9f9;
     border-bottom:1px #d0d0d0 solid;
+}
+header p:nth-of-type(1){
+    line-height:5vh;
+    text-align:center;
+    font-size:18px;
+}
+header p:nth-of-type(2){
+    text-align:center;
+    font-size:20px;
+    line-height:2vh;
 }
  header span:nth-of-type(1){
     font-size:18px;
     position:absolute;
     top:4vh;
     left:5%;
- }
- header span:nth-of-type(2){
-    font-size:18px;
-    position:absolute;
-    top:2vh;
-    left:40%;
- }
- header span:nth-of-type(3){
-    font-size: 20px;
-    position: absolute;
-    top: 5vh;
-    left: 43%;
-    color: #848080;
  }
  header div{
     width: 15%;
@@ -103,6 +100,7 @@ export default{
     width:25%;
     float:left;
     padding-top:2vh;
+    text-align:center;
  }
  main .input .export ul li span{
     font-size:25px;

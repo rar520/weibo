@@ -67,7 +67,7 @@ input{
     font-family: 楷体;
     border-radius: 4px;
     border: 1px #a0a0a0 solid;
-    margin-left: 2%;
+    margin-left: 11%;
     margin-bottom: 6vh;
     padding-left: 5%;
   }
@@ -81,7 +81,7 @@ input{
     color: #ffffff;
     border: 1px #eedcc8 solid;
     background-color: #ffd8af;
-    margin-left: -4%;
+    margin-left: 38%;
     padding:0;
     text-align:center;
   }
