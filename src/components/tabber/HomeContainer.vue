@@ -109,7 +109,7 @@
         <span class="mui-icon mui-icon-home"></span>
         <span class="mui-tab-label">首页</span>
       </router-link>
-      <router-link class="mui-tab-item-mr" to="/message">
+      <router-link class="mui-tab-item-mr" to="/notify">
         <span class="mui-icon mui-icon-email-filled">
           <span class="mui-badge" id="badge">9</span>
         </span>
