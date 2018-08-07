@@ -8,80 +8,80 @@
           <li>
             <router-link to="/home/content">
               <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></router-link></div>
-                <div><router-link to="/personal" style="color:#0941f7">小天鹅-</router-link>评论了你的微博</div>
+                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="/personal"><span>小天鹅-</span></router-link>评论了你的微博</div>
                 <div>嗨喽，大家好。我很高兴</div>
               </div>
+              <div class="down">
+                <span>7-13</span>
+                <span class="mui-icon-extra mui-icon-extra-like"></span>
+              </div>
             </router-link>
-            <div class="down">
-              <span>7-13</span>
-              <span class="mui-icon-extra mui-icon-extra-like"></span>
-            </div>
           </li>
           <li>
             <router-link to="/home/content">
               <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></router-link></div>
-                <div><router-link to="/personal" style="color:#0941f7">小天鹅-</router-link>评论了<router-link to="/personal" style="color:#0941f7">若水</router-link>的微博</div>
+                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="/personal"><span>小天鹅-</span></router-link>评论了<router-link to="/personal"><span>若水</span></router-link>的微博</div>
                 <div>嗨喽，大家好。我很高兴</div>
               </div>
-            </router-link>
-            <div class="down">
-              <span>7-13</span>
-              <span class="mui-icon-extra mui-icon-extra-like"></span>
-            </div>
-          </li>
-          <li>
-            <router-link to="/home/content">
-              <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></router-link></div>
-                <div><router-link to="personal" style="color:#0941f7">小天鹅-</router-link>等9人点赞了你</div>
-                <div><img src="../../../static/img/zan.png" width="50px" height="50px"></div>
+              <div class="down">
+                <span>7-13</span>
+                <span class="mui-icon-extra mui-icon-extra-like"></span>
               </div>
             </router-link>
-            <div class="down">
-              <span>7-13</span>
-              <span class="mui-icon-extra mui-icon-extra-like"></span>
-            </div>
           </li>
           <li>
             <router-link to="/home/content">
               <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></router-link></div>
-                <div><router-link to="/personal" style="color:#0941f7">小天鹅-</router-link>评论了你的微博</div>
+                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="personal"><span>小天鹅-</span></router-link>等9人点赞了你</div>
+                <div><img src="../../../static/img/zan.png"></div>
+              </div>
+              <div class="down">
+                <span>7-13</span>
+                <span class="mui-icon-extra mui-icon-extra-like"></span>
+              </div>
+             </router-link>
+          </li>
+          <li>
+            <router-link to="/home/content">
+              <div class="up">
+                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="/personal"><span>小天鹅-</span></router-link>评论了你的微博</div>
                 <div>嗨喽，大家好。我很高兴</div>
               </div>
-            </router-link>
-            <div class="down">
-              <span>7-13</span>
-              <span class="mui-icon-extra mui-icon-extra-like"></span>
-            </div>
+              <div class="down">
+                <span>7-13</span>
+                <span class="mui-icon-extra mui-icon-extra-like"></span>
+              </div>
+             </router-link>
           </li>
           <li>
             <router-link to="/home/content">
               <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></router-link></div>
-                <div><router-link to="/personal" style="color:#0941f7">小天鹅-</router-link>评论了<router-link to="/personal" style="color:#0941f7">若水</router-link>的微博</div>
+                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="/personal"><span>小天鹅-</span></router-link>评论了<router-link to="/personal"><span>若水</span></router-link>的微博</div>
                 <div>嗨喽，大家好。我很高兴</div>
               </div>
+              <div class="down">
+                <span>7-13</span>
+                <span class="mui-icon-extra mui-icon-extra-like"></span>
+              </div>
             </router-link>
-            <div class="down">
-              <span>7-13</span>
-              <span class="mui-icon-extra mui-icon-extra-like"></span>
-            </div>
           </li>
           <li>
             <router-link to="/home/content">
               <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg" width="55px" height="55px"></router-link></div>
-                <div><router-link to="/personal" style="color:#0941f7">小天鹅-</router-link>等9人点赞了你</div>
-                <div><img src="../../../static/img/zan.png" width="50px" height="50px"></div>
+                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="/personal"><span>小天鹅-</span></router-link>等9人点赞了你</div>
+                <div><img src="../../../static/img/zan.png"></div>
+              </div>
+              <div class="down">
+                <span>7-13</span>
+                <span class="mui-icon-extra mui-icon-extra-like"></span>
               </div>
             </router-link>
-            <div class="down">
-              <span>7-13</span>
-              <span class="mui-icon-extra mui-icon-extra-like"></span>
-            </div>
           </li>
         </ul>
       </div>
@@ -159,11 +159,11 @@ export default {
 .header{
   width: 100%;
   height: 8vh;
-  margin-bottom: 1vh;
   position: fixed;
   top: 0;
   z-index:99;
   background-color: white;
+  border-bottom: 1px gray solid;
 }
 .header p{
   color: black;
@@ -174,7 +174,7 @@ export default {
   width: 100%;
 }
 .content ul li{
-  height:20vh;
+  height:16vh;
   margin-top: 2vh;
 }
 .content ul li .up{
@@ -184,22 +184,36 @@ export default {
 .content ul li .up div:nth-child(1){
   width: 55px;
   height: 55px;
-  float: left;
+  position: absolute;
+  left: 0;
   border-radius: 50%;
   overflow: hidden;
 }
+.content ul li .up div:nth-child(1) img{
+  width: 55px;
+  height: 55px;
+}
 .content ul li .up div:nth-child(2){
+  height: 100%;
   position: absolute;
   left: 20%;
   right:20%;
 }
+.content ul li .up div:nth-child(2) span{
+  color:#0941f7
+}
 .content ul li .up div:nth-child(3){
   width: 20%;
-  height: 15vh;
-  float: right;
+  height: 10vh;
+  position: absolute;
+  right: 0;
+}
+.content ul li .up div:nth-child(3) img{
+  width: 90%;
+  height: 10vh;
 }
 .content ul li .down{
-  height: 10vh;
+  height: 6vh;
   position:relative;
   border-bottom: 1px solid gray;
 
