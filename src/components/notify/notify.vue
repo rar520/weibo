@@ -1,123 +1,27 @@
 <template>
-    <div style="padding-top:8vh;">
-      <div class="header">
+    <div>
+      <header>
         <p>通知</p>
-      </div>
+      </header>
       <div class="content">
         <ul>
-          <li>
-            <router-link to="/home/content">
+          <li v-for="(item,i) in list" :key="i">
+            <router-link to="'/home/content'+list[i].weibo_id">
               <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
-                <div><router-link to="/personal"><span>小天鹅-</span></router-link>评论了你的微博</div>
-                <div>嗨喽，大家好。我很高兴</div>
+                <div><router-link to="'/personal'+list[i].comment_user_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div>
+                  <p><router-link to="'/personal'+list[i].comment_user_id"><span>{{list[i].comment_nick_name}}</span></router-link>评论了你的微博</p>
+                  <p>{{list[i].comment_content}}</p>
+                </div>
+                <div>{{list[i].weibo_content}}</div>
               </div>
               <div class="down">
-                <span>7-13</span>
-                <span class="mui-icon-extra mui-icon-extra-like"></span>
-              </div>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/home/content">
-              <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
-                <div><router-link to="/personal"><span>小天鹅-</span></router-link>评论了<router-link to="/personal"><span>若水</span></router-link>的微博</div>
-                <div>嗨喽，大家好。我很高兴</div>
-              </div>
-              <div class="down">
-                <span>7-13</span>
-                <span class="mui-icon-extra mui-icon-extra-like"></span>
-              </div>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/home/content">
-              <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
-                <div><router-link to="personal"><span>小天鹅-</span></router-link>等9人点赞了你</div>
-                <div><img src="../../../static/img/zan.png"></div>
-              </div>
-              <div class="down">
-                <span>7-13</span>
-                <span class="mui-icon-extra mui-icon-extra-like"></span>
-              </div>
-             </router-link>
-          </li>
-          <li>
-            <router-link to="/home/content">
-              <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
-                <div><router-link to="/personal"><span>小天鹅-</span></router-link>评论了你的微博</div>
-                <div>嗨喽，大家好。我很高兴</div>
-              </div>
-              <div class="down">
-                <span>7-13</span>
-                <span class="mui-icon-extra mui-icon-extra-like"></span>
-              </div>
-             </router-link>
-          </li>
-          <li>
-            <router-link to="/home/content">
-              <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
-                <div><router-link to="/personal"><span>小天鹅-</span></router-link>评论了<router-link to="/personal"><span>若水</span></router-link>的微博</div>
-                <div>嗨喽，大家好。我很高兴</div>
-              </div>
-              <div class="down">
-                <span>7-13</span>
-                <span class="mui-icon-extra mui-icon-extra-like"></span>
-              </div>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/home/content">
-              <div class="up">
-                <div><router-link to="/personal"><img src="../../../static/img/imgone.jpg"></router-link></div>
-                <div><router-link to="/personal"><span>小天鹅-</span></router-link>等9人点赞了你</div>
-                <div><img src="../../../static/img/zan.png"></div>
-              </div>
-              <div class="down">
-                <span>7-13</span>
-                <span class="mui-icon-extra mui-icon-extra-like"></span>
+                <span>{{list[i].comment_date}}</span>        
               </div>
             </router-link>
           </li>
         </ul>
       </div>
-      <!-- <div class="footer">
-        <ul>
-          <li>
-            <router-link to="/home">
-              <span class="mui-icon mui-icon-home"></span>
-              <p>微博</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="">
-              <span class="mui-icon mui-icon-email"></span>
-              <p>消息</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="">
-              <span class="mui-icon mui-icon-plusempty" style="font-size:40px; background-color:#ff8100;color:white;"></span>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/search">
-              <span class="mui-icon mui-icon-search"></span>
-              <p>发现</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/personal">
-              <span class="mui-icon mui-icon-person"></span>
-              <p>我</p>
-            </router-link>
-          </li>
-        </ul>
-      </div> -->
       <nav class="mui-bar mui-bar-tab">
         <router-link class="mui-tab-item-mr" to="/home">
           <span class="mui-icon mui-icon-home"></span>
@@ -150,13 +54,52 @@ export default {
   name: 'notify',
   data () {
     return {
-      showTime:''
+      list:[
+        {
+          comment_user_id:'',
+          comment_nick_img:'',
+          comment_nick_name:'小可爱',
+          comment_content:'我是你的小可爱',
+          weibo_id:'',
+          weibo_content:'这是我发的微博',
+          comment_date:'7-14'
+        },
+        {
+          comment_user_id:'',
+          comment_nick_img:'',
+          comment_nick_name:'美少女',
+          comment_content:'我是你的美少女',
+          weibo_id:'',
+          weibo_content:'这是我发的微博',
+          comment_date:'7-13'
+        }
+      ]
+    }
+  },
+  created(){
+    this.getInfo();
+  },
+  methods:{
+    getInfo(){
+      this.$http.get('homepage/homepage').then(result=>{
+        console.log(result.body)
+        // this.list.push({
+        //   comment_nick_img:'',
+        //   comment_nick_name:'美少女',
+        //   comment_content:'我是你的美少女',
+        //   weibo_content:'这是我发的微博',
+        //   comment_date:'7-14'
+        // })
+      })
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.header{
+*{
+  color: black;
+}
+header{
   width: 100%;
   height: 8vh;
   position: fixed;
@@ -165,13 +108,15 @@ export default {
   background-color: white;
   border-bottom: 1px gray solid;
 }
-.header p{
+header p{
   color: black;
   text-align: center;
   line-height: 8vh;
 }
 .content{
   width: 100%;
+  position: relative;
+  top:8vh;
 }
 .content ul li{
   height:16vh;
@@ -199,18 +144,19 @@ export default {
   left: 20%;
   right:20%;
 }
-.content ul li .up div:nth-child(2) span{
+.content ul li .up div:nth-child(2) p{
+  width: 100%;
+  height: 50%;
+
+}
+.content ul li .up div:nth-child(2) p span{
   color:#0941f7
 }
 .content ul li .up div:nth-child(3){
-  width: 20%;
+  width: 70px;
   height: 10vh;
   position: absolute;
   right: 0;
-}
-.content ul li .up div:nth-child(3) img{
-  width: 90%;
-  height: 10vh;
 }
 .content ul li .down{
   height: 6vh;
@@ -223,31 +169,6 @@ export default {
   left:25%;
   bottom: 2vh;
 }
-.content ul li .down span:nth-child(2){
-  position:absolute;
-  right:5%;
-  bottom: 2vh;
-  color:gray;
-}
-.content ul li .down span:nth-child(2).hover{
-  color:yellow;
-}
-// .footer{
-//   width:100%;
-//   height:8vh;
-//   position: fixed;
-//   bottom: 0;
-//   background-color: white;
-//   padding-top:1vh;
-// }
-// .footer ul{
-//   display: flex;
-//   justify-content: space-between;
-// }
-// .footer ul li{
-//   width: 20%;
-//   height:8vh;
-// }
 .mui-bar {
   background-color: #fafafa;
   height: 50px;
