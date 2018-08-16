@@ -110,8 +110,8 @@
         <span class="mui-tab-label">首页</span>
       </router-link>
       <router-link class="mui-tab-item-mr" to="/notify">
-        <span class="mui-icon mui-icon-email-filled">
-          <span class="mui-badge" id="badge">9</span>
+        <span class="mui-icon mui-icon-email">
+          <span class="mui-badge" id="badge">0</span>
         </span>
         <span class="mui-tab-label">消息</span>
       </router-link>
@@ -124,7 +124,7 @@
         <span class="mui-tab-label">发现</span>
       </router-link>
       <router-link class="mui-tab-item-mr" to="/personal">
-        <span class="mui-icon mui-icon-person-filled"></span>
+        <span class="mui-icon mui-icon-person"></span>
         <span class="mui-tab-label">我</span>
       </router-link>
     </nav>

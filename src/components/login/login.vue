@@ -5,11 +5,11 @@
         <span class="mui-icon mui-icon-closeempty"></span>
       </router-link>
       <form action="">
-        <input type="text" placeholder="请输入账户名" v-model="userid" @blur="blurUserid" v-focus/>
-        <input type="password" placeholder="请输入密码" v-model="password" @blur="blurPassword" />
-        <router-link to="/home">
+        <input type="text" placeholder="请输入账户名" v-model="userid" v-focus/>
+        <input type="password" placeholder="请输入密码" v-model="password" />
+        <!-- <router-link to="/home"> -->
           <input type="submit" value="登录" id="login" @click="postInfro" />
-        </router-link>
+        <!-- </router-link> -->
       </form>
     </div>
 </template>
@@ -26,29 +26,55 @@ export default {
   },
   methods:{
     postInfro(){
-        //把帐户名和密码、头像 发送给后台
-        this.$http.post('check',{'userid':this.userid.trim(),'password':this.password.trim()})
-        .then(function(result){
-            console.log(result.body);
+      if(this.userid.trim().length === 0 && this.password.trim().length === 0){
+          return Toast("账号密码不能为空！");
+        }
+        else{
+          this.$axios({
+            method:'post',
+            url:'check',
+            data:{'userid':this.userid.trim(),'password':this.password.trim()}
+          }).then((result)=>{
             if(result.body.status == 1){
-              console.log("登陆成功!");
-            }
-            else{
-              console.log(result.body.status);
-              return Toast("账号或密码错误！");
-            }
-        })
-      },
-      blurUserid(){
-        if(this.userid.trim().length === 0){
-          return Toast("账号不能为空！");
+                console.log("登陆成功!");
+              }
+              else{
+                console.log(result.body.status);
+                return Toast("账号或密码错误！");
+              }
+          })
+          // this.$http.post('/api/check.htm',{
+          //   params:{
+
+          //   }
+          // }).then(res=>{
+          //   console.log(res.data);
+          // })
+          //把帐户名和密码 发送给后台
+          // this.$http.post('check',{'userid':this.userid.trim(),'password':this.password.trim()})
+          // .then(function(result){
+          //     // console.log(result.body);
+          //     if(result.body.status == 1){
+
+          //       console.log("登陆成功!");
+          //     }
+          //     else{
+          //       console.log(result.body.status);
+          //       return Toast("账号或密码错误！");
+          //     }
+          // })
         }
       },
-      blurPassword(){
-        if(this.password.trim().length === 0){
-            return Toast("密码不能为空！");
-        }
-      }
+      // blurUserid(){
+      //   if(this.userid.trim().length === 0){
+      //     return Toast("账号不能为空！");
+      //   }
+      // },
+      // blurPassword(){
+      //   if(this.password.trim().length === 0){
+      //       return Toast("密码不能为空！");
+      //   }
+      // }
   },
   directives:{
     'focus':{

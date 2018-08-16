@@ -9,13 +9,14 @@
         <div class="head_img">
              <img id="imghead" src="../../../static/img/origin_head.png" width="55px" height="55px" /> 
         </div>
-        <form action="">
-            <!-- <input type="file" id="head_pic" name="pic" accept="image/*" /> -->
-            <!-- <input class="upload" type="file" @change='add_img' /> -->
+        <form id="form1" method="post" action="http://192.168.0.108:8080/picsend" enctype="mulitipart/form-data">
             <!-- //图片上传 -->
             <div class="file_div">选择头像
-                <input type="file" name="file" id="file" value="选择头像" accept="image/*" @change="imgChange(this);"/>
+                <input type="file" name="mulitipartFile" id="file" value="选择头像" accept="image/*" />
             </div>
+            <input type="submit" />
+        </form>
+        <form action=''>
             <input type="text" placeholder="请输入账号" v-model="nickname" @blur="blurNickName" v-focus/>
             <input type="password" placeholder="请输入密码" v-model="password" @blur="blurPassword" />
             <input type="password" placeholder="请确认密码" v-model="pass_define" @blur="blurPassDefine" />
@@ -25,7 +26,6 @@
         </form>
     </div>
 </template>
-
 <script>
 import { Toast } from "mint-ui";
 export default{
@@ -39,15 +39,15 @@ export default{
         }
     },
     methods:{
-        router_next(){
-            this.$router.push({
-                path:'before_login',
-                name:'before_login',
-                params:{
+        // router_next(){
+        //     this.$router.push({
+        //         path:'before_login',
+        //         name:'before_login',
+        //         params:{
 
-                }
-            })
-        },
+        //         }
+        //     })
+        // },
         postRegister(event){
             event.preventDefault();
             let formData = new FormData();
@@ -60,10 +60,10 @@ export default{
                 'Content-Type': 'multipart/form-data'
               }
             }
-            // if(this.nickname.trim().length === 0 || this.password.trim().length ===0 ){
-            //     return Toast("账户名密码不能为空！");
-            // }
-            // else{
+            if(this.nickname.trim().length === 0 || this.password.trim().length ===0 ){
+                return Toast("账户名密码不能为空！");
+            }
+            else{
                 this.$http.post('doregist', formData,config).then(function (result) {
                 if(result.body.status == 1){
                     // this.$router.go("/login");
@@ -73,7 +73,7 @@ export default{
                     alert("你的账号是：" + returnObj);
                 }
               })
-            // }
+            }
         },
         blurNickName(){
             var re = /^\S{1,7}$/;
@@ -99,13 +99,27 @@ export default{
                 return Toast("确认密码不符，请重新输入！");
             }
         },
-        imgChange(obj) {
+        imgChange() {
                 //获取点击的文本框
-                var file =document.getElementById("file");
-                var imgUrl =window.URL.createObjectURL(file.files[0]);
+                // var file =document.getElementById("file");
+                // var imgUrl =window.URL.createObjectURL(file.files[0]);
+                // var img =document.getElementById('imghead');
+                // img.setAttribute('src',imgUrl); // 修改img标签src属性值
+                // this.headimage = imgUrl;
+                var  file_obj = document.getElementById("file");
                 var img =document.getElementById('imghead');
-                img.setAttribute('src',imgUrl); // 修改img标签src属性值
-                this.headimage = imgUrl;
+                var file = file_obj.files[0];
+                if(undefined == file){
+                    return ;
+                }
+                var r = new FileReader(); 
+                r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
+                r.onload = function(e) {
+                    var base64 = e.target.result;
+                    console.log(base64);
+                    img.setAttribute('src',base64);
+                    this.headimage = base64;
+                }
         }
     },
     directives:{
@@ -117,7 +131,6 @@ export default{
     }
 }
 </script>
-
 <style scoped>
 div{
     padding-top:20vh;

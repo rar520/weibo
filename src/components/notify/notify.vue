@@ -6,17 +6,17 @@
       <div class="content">
         <ul>
           <li v-for="(item,i) in newlist" :key="i">
-            <router-link to="'/home/content'+newlist[i].weibo_id">
+            <router-link to="'/home/content'+newlist[i].WeiBo_id">
               <div class="up">
-                <div><router-link to="'/personal'+newlist[i].comment_user_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="'/personal'+newlist[i].commentuser_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
                 <div>
-                  <p><router-link to="'/personal'+newlist[i].comment_user_id"><span>{{newlist[i].comment_nick_name}}</span></router-link>评论了你的微博</p>
+                  <p><router-link to="'/personal'+newlist[i].commentuser_id"><span>{{newlist[i].nick_name}}</span></router-link>评论了你的微博</p>
                   <p>{{newlist[i].comment_content.substring(0,15)}}</p>
                 </div>
                 <div>{{newlist[i].weibo_content.substring(0,20)}}</div>
               </div>
               <div class="down">
-                <span>{{newlist[i].comment_date}}</span>        
+                <span>{{newlist[i].comment_date | dataFormat}}</span>        
               </div>
             </router-link>
           </li>
@@ -83,7 +83,7 @@ export default {
       this.$http.get('user/massage').then(result=>{
         if(result.body.status==1){
           this.list=result.body.object;
-           this.makelist(this.count,this.list);
+          this.makelist(this.count,this.list);
         }
       })
     }

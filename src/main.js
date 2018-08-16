@@ -33,16 +33,29 @@ Vue.use(VueRouter)
 //导入自己路由组件匹配文件
 import router from './router/index.js'
 
+//vue-resource
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 Vue.http.options.root='http://192.168.0.108:8080'
 Vue.http.options.emulateJSON=true;
 
+
+//axios
+// import axios from 'axios'
+// Vue.prototype.$http=axios;
+
+//moment
+import moment from 'moment'
+Vue.filter('dataFormat',function(data,pattern='YYYY-MM-DD HH:mm'){
+  return moment(data).format(pattern);
+})
+
+
 import '../static/mui/css/mui.css'
 import '../static/mui/css/icons-extra.css'
 import '../static/css/common.css'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
