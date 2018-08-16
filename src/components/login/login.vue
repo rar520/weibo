@@ -30,23 +30,40 @@ export default {
           return Toast("账号密码不能为空！");
         }
         else{
-          let self = this;
-          this.$axios.post('http://192.168.0.117:80/check'+new Date().getTime.toString(), {
-            'userid':this.userid.trim(),'password':this.password.trim()
-          }, {
-              headers: {
-                "Content-Type":"application/json;charset=utf-8"
-              },
-              withCredentials : true
-          }).then(function(response) {
-              // 这里是处理正确的回调
-              console.log(response.body);
-          }).catch( function(response) {
-              // 这里是处理错误的回调
-              console.log(response.status);
-          });
+          // var that = this;
+          // $.ajax({
+          //   url:'http://192.168.0.108:8080/check',
+          //   type:'post',
+          //   data : {userid : this.userid,password : this.password},
+          //   dataType:'json',
+          //   xhrField:{
+          //     withCredenttials:true   //前端设置是否带cookie
+          //   },
+          //   crossDomain:true,
+          //   success:function(goods){
+          //     console.log(goods);
+          //   },
+          //   error:function(){
+          //     console.log("出错了！");
+          //   }
+          // })
+          // let self = this;
+          // this.$axios.post('http://192.168.0.108:8080/check', {
+          //   'userid':this.userid.trim(),'password':this.password.trim()
+          // }, {
+          //     headers: {
+          //       "Content-Type":"application/json;charset=utf-8"
+          //     },
+          //     withCredentials : true
+          // }).then(function(response) {
+          //     // 这里是处理正确的回调
+          //     console.log(response.body);
+          // }).catch( function(response) {
+          //     // 这里是处理错误的回调
+          //     console.log(response.status);
+          // });
 
-          //  this.$http.post('check',{'userid':this.userid.trim(),'password':this.password.trim()})
+          //  this.$http.post('192.168.0.108:8080/check',{'userid':this.userid.trim(),'password':this.password.trim()})
           //   .then(function(result){
           //       // console.log(result.body);
           //       if(result.body.status == 1){
@@ -76,13 +93,15 @@ export default {
           // })
           //把帐户名和密码 发送给后台
 
-          // this.$axios.post('/api/check')
-          // .then(function (response) {
-          //   console.log(response);
-          // })
-          // .catch(function (error) {
-          //   console.log(error);
-          // });
+          this.$http.post('http://192.168.0.108:8080/check',{
+            'userid':this.userid,'password':this.password
+          })
+          .then(function (result) {
+            console.log(result.body.status);
+          })
+          .catch(function (error) {
+            console.log("error");
+          });
 
 
             // this.$http.post("/api/check",{
@@ -95,8 +114,6 @@ export default {
             // });
         }
       }
-  },
-  created(){
   },
          
           
@@ -116,12 +133,13 @@ export default {
         el.focus();
       }
     }
+  },
+  created(){
   }
 }
 </script>
 
 <style scoped>
-  /* @import '../../../static/css/common.css'; */
   div{
     font-family:楷体;
     padding-top:30%;
@@ -169,5 +187,4 @@ export default {
     background-color:#fe8101;
     border:0;
   }
-
 </style>

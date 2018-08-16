@@ -55,6 +55,7 @@
         </footer>
     </div>
 </template>
+
 <script>
 export default {
    name: 'before_login',

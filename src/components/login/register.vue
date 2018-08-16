@@ -12,9 +12,9 @@
         <form id="form1" method="post" action="http://192.168.0.108:8080/picsend" enctype="mulitipart/form-data">
             <!-- //图片上传 -->
             <div class="file_div">选择头像
-                <input type="file" name="mulitipartFile" id="file" value="选择头像" accept="image/*" />
+                <input type="file" name="mulitipartFile" id="file" value="选择头像" accept="image/*" @click="imgChange"/>
             </div>
-            <input type="submit" />
+            <input type="submit"/>
         </form>
         <form action=''>
             <input type="text" placeholder="请输入账号" v-model="nickname" @blur="blurNickName" v-focus/>
@@ -26,6 +26,7 @@
         </form>
     </div>
 </template>
+
 <script>
 import { Toast } from "mint-ui";
 export default{
@@ -39,6 +40,9 @@ export default{
         }
     },
     methods:{
+        // recieveImg(){
+
+        // },
         // router_next(){
         //     this.$router.push({
         //         path:'before_login',
@@ -67,9 +71,9 @@ export default{
                 this.$http.post('doregist', formData,config).then(function (result) {
                 if(result.body.status == 1){
                     // this.$router.go("/login");
-                    console.log(result.body.status);
+                    // console.log(result.body.status);
                     var returnObj = result.body.object;
-                    console.log(returnObj);
+                    // console.log(returnObj);
                     alert("你的账号是：" + returnObj);
                 }
               })
@@ -116,7 +120,7 @@ export default{
                 r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
                 r.onload = function(e) {
                     var base64 = e.target.result;
-                    console.log(base64);
+                    // console.log(base64);
                     img.setAttribute('src',base64);
                     this.headimage = base64;
                 }
@@ -131,6 +135,7 @@ export default{
     }
 }
 </script>
+
 <style scoped>
 div{
     padding-top:20vh;
