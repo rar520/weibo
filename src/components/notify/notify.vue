@@ -5,21 +5,23 @@
       </header>
       <div class="content">
         <ul>
-          <li v-for="(item,i) in list" :key="i">
-            <router-link to="'/home/content'+list[i].weibo_id">
+          <li v-for="(item,i) in newlist" :key="i">
+            <router-link to="'/home/content'+newlist[i].weibo_id">
               <div class="up">
-                <div><router-link to="'/personal'+list[i].comment_user_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="'/personal'+newlist[i].comment_user_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
                 <div>
-                  <p><router-link to="'/personal'+list[i].comment_user_id"><span>{{list[i].comment_nick_name}}</span></router-link>评论了你的微博</p>
-                  <p>{{list[i].comment_content}}</p>
+                  <p><router-link to="'/personal'+newlist[i].comment_user_id"><span>{{newlist[i].comment_nick_name}}</span></router-link>评论了你的微博</p>
+                  <p>{{newlist[i].comment_content.substring(0,15)}}</p>
                 </div>
-                <div>{{list[i].weibo_content}}</div>
+                <div>{{newlist[i].weibo_content.substring(0,20)}}</div>
               </div>
               <div class="down">
-                <span>{{list[i].comment_date}}</span>        
+                <span>{{newlist[i].comment_date}}</span>        
               </div>
             </router-link>
           </li>
+          <input type="button" value="点击加载更多..." v-show="flag1" id="btn" @click="showmore"/>
+          <input type="button" value="已全部加载完成" v-show="flag2" id="btn" disabled>
         </ul>
       </div>
       <nav class="mui-bar mui-bar-tab">
@@ -28,8 +30,8 @@
           <span class="mui-tab-label">首页</span>
         </router-link>
         <router-link class="mui-tab-item-mr" to="/notify">
-          <span class="mui-icon mui-icon-email-filled">
-            <span class="mui-badge" id="badge">9</span>
+          <span class="mui-icon mui-icon-email">
+            <span class="mui-badge" id="badge">{{list.length}}</span>
           </span>
           <span class="mui-tab-label">消息</span>
         </router-link>
@@ -48,48 +50,41 @@
       </nav>
     </div>
 </template>
-
 <script>
 export default {
   name: 'notify',
   data () {
     return {
-      list:[
-        {
-          comment_user_id:'',
-          comment_nick_img:'',
-          comment_nick_name:'小可爱',
-          comment_content:'我是你的小可爱',
-          weibo_id:'',
-          weibo_content:'这是我发的微博',
-          comment_date:'7-14'
-        },
-        {
-          comment_user_id:'',
-          comment_nick_img:'',
-          comment_nick_name:'美少女',
-          comment_content:'我是你的美少女',
-          weibo_id:'',
-          weibo_content:'这是我发的微博',
-          comment_date:'7-13'
-        }
-      ]
+      flag1:true,
+      flag2:false,
+      count:1,
+      newlist:[],
+      list:[]
     }
   },
   created(){
     this.getInfo();
   },
   methods:{
+    showmore(){
+        this.count++;
+        this.makelist(this.count,this.list);
+    },
+    makelist(count,list){
+        for(var i=(this.count-1)*5;i<this.count*5&&i<this.list.length;i++){
+          this.newlist.push(this.list[i])
+        }
+        if(i==this.list.length){
+          this.flag1=false;
+          this.flag2=true;
+        }
+    },
     getInfo(){
-      this.$http.get('homepage/homepage').then(result=>{
-        console.log(result.body)
-        // this.list.push({
-        //   comment_nick_img:'',
-        //   comment_nick_name:'美少女',
-        //   comment_content:'我是你的美少女',
-        //   weibo_content:'这是我发的微博',
-        //   comment_date:'7-14'
-        // })
+      this.$http.get('user/massage').then(result=>{
+        if(result.body.status==1){
+          this.list=result.body.object;
+           this.makelist(this.count,this.list);
+        }
       })
     }
   }
@@ -112,11 +107,18 @@ header p{
   color: black;
   text-align: center;
   line-height: 8vh;
+  font-size: 18px;
 }
 .content{
   width: 100%;
-  position: relative;
+  position: absolute;
   top:8vh;
+}
+.content ul{
+  margin-bottom: 8vh;
+}
+#btn{
+  width: 100%;
 }
 .content ul li{
   height:16vh;
@@ -162,16 +164,17 @@ header p{
   height: 6vh;
   position:relative;
   border-bottom: 1px solid gray;
+  margin-left:20%;
 
 }
 .content ul li .down span:nth-child(1){
   position:absolute;
-  left:25%;
+  left:20%;
   bottom: 2vh;
 }
 .mui-bar {
   background-color: #fafafa;
-  height: 50px;
+  height: 8vh;
   bottom: -1px;
 }
 .mui-bar-tab .mui-tab-item-mr.router-link-active {

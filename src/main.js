@@ -35,7 +35,7 @@ import router from './router/index.js'
 
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
-Vue.http.options.root='http://192.168.0.117:80'
+Vue.http.options.root='http://192.168.0.108:8080'
 Vue.http.options.emulateJSON=true;
 
 import '../static/mui/css/mui.css'

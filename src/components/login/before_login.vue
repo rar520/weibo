@@ -17,31 +17,37 @@
                 <div class="login">
                     <router-link to="/login" class="login_link">登录</router-link>
                 </div>
-                <!-- <input type="button" value="注册"/>
-                <input type="button" value="登录"/> -->
             </div>
         </main>
         <footer>
             <ul class="clearfix">
                 <li>
-                    <span class="mui-icon mui-icon-home"></span>
+                    <!-- <router-link to="/home"> -->
+                        <span class="mui-icon mui-icon-home"></span>
+                    <!-- </router-link> -->
                     <p>微博</p>
                 </li>
                 <li>
-                    <span class="mui-icon mui-icon-email"></span>
+                    <!-- <router-link to="/notify"> -->
+                        <span class="mui-icon mui-icon-email"></span>
+                    <!-- </router-link> -->
                     <p>消息</p>
                 </li>
                 <li class="publish">
-                    <router-link to="/publish">
+                    <!-- <router-link to="/publish"> -->
                         <span class="mui-icon mui-icon-plusempty"></span>
-                    </router-link>
+                    <!-- </router-link> -->
                 </li>
                 <li>
-                    <span class="mui-icon mui-icon-search"></span>
+                    <!-- <router-link to="/search"> -->
+                        <span class="mui-icon mui-icon-search"></span>
+                    <!-- </router-link> -->
                     <p>发现</p>
                 </li>
                 <li>
-                    <span class="mui-icon mui-icon-person"></span>
+                    <router-link to="/personal">
+                        <span class="mui-icon mui-icon-person"></span>
+                    </router-link>
                     <p>我</p>
                 </li>
             </ul>
@@ -67,6 +73,7 @@ div:nth-of-type(1){
     background-color:#efe8e8;
     height:100vh;
 }
+/* 头部 */
 header{
     width:100%;
     height:8vh;
@@ -76,6 +83,7 @@ header{
 header h1{
     font-size:18px;
     line-height:4vh;
+    text-align:center;
 }
 header a{
     font-size:18px;
@@ -83,6 +91,7 @@ header a{
     top:4vh;
     left:85%;
 }
+/* 主体 */
 main{
     padding-bottom:8vh;
 }
@@ -124,7 +133,7 @@ main .login_register div{
     border:1px #c9c9c9 solid;
     border-radius:4px;
     font-size:20px;
-    margin:0 auto;
+    text-align:center;
 }
 main .login_register div:nth-of-type(1){
     margin-right:10%;
@@ -139,11 +148,14 @@ main .login_register div:nth-of-type(2) .login_link{
     color:#676464;
     margin:0 auto;
 }
+
+/* 底部 */
 footer{
     height:9vh;
     border-top:1px #9b9696 solid;
 }
 footer ul li{
+    text-align:center;
     width:20%;
     float:left;
 }
