@@ -30,32 +30,43 @@ export default {
           return Toast("账号密码不能为空！");
         }
         else{
-          this.$axios({
-            method:'post',
-            url:'check',
-            data:{'userid':this.userid.trim(),'password':this.password.trim()}
-          }).then((result)=>{
-            if(result.body.status == 1){
-                console.log("登陆成功!");
-              }
-              else{
-                console.log(result.body.status);
-                return Toast("账号或密码错误！");
-              }
-          })
-          // this.$http.post('/api/check.htm',{
-          //   params:{
+          let self = this;
+          this.$axios.post('http://192.168.0.117:80/check'+new Date().getTime.toString(), {
+            'userid':this.userid.trim(),'password':this.password.trim()
+          }, {
+              headers: {
+                "Content-Type":"application/json;charset=utf-8"
+              },
+              withCredentials : true
+          }).then(function(response) {
+              // 这里是处理正确的回调
+              console.log(response.body);
+          }).catch( function(response) {
+              // 这里是处理错误的回调
+              console.log(response.status);
+          });
 
+          //  this.$http.post('check',{'userid':this.userid.trim(),'password':this.password.trim()})
+          //   .then(function(result){
+          //       // console.log(result.body);
+          //       if(result.body.status == 1){
+          //         console.log("登陆成功!");
+          //       }
+          //       else{
+          //         console.log(result.body.status);
+          //         return Toast("账号或密码错误！");
+          //       }
+          //   })
+        
+          // this.$axios({
+          //   method:'post',
+          //   url:'http://192.168.0.108:8080/check',
+          //   data:{
+          //     userid:this.userid.trim(),
+          //     password:this.password.trim()
           //   }
-          // }).then(res=>{
-          //   console.log(res.data);
-          // })
-          //把帐户名和密码 发送给后台
-          // this.$http.post('check',{'userid':this.userid.trim(),'password':this.password.trim()})
-          // .then(function(result){
-          //     // console.log(result.body);
-          //     if(result.body.status == 1){
-
+          // }).then((result)=>{
+          //   if(result.body.status == 1){
           //       console.log("登陆成功!");
           //     }
           //     else{
@@ -63,8 +74,32 @@ export default {
           //       return Toast("账号或密码错误！");
           //     }
           // })
+          //把帐户名和密码 发送给后台
+
+          // this.$axios.post('/api/check')
+          // .then(function (response) {
+          //   console.log(response);
+          // })
+          // .catch(function (error) {
+          //   console.log(error);
+          // });
+
+
+            // this.$http.post("/api/check",{
+            //   params:{}
+            // })
+            // .then((result)=>{
+            //   console.log(result.data);
+            // }).catch((error)=>{
+            //   console.log(error);
+            // });
         }
-      },
+      }
+  },
+  created(){
+  },
+         
+          
       // blurUserid(){
       //   if(this.userid.trim().length === 0){
       //     return Toast("账号不能为空！");
@@ -75,15 +110,12 @@ export default {
       //       return Toast("密码不能为空！");
       //   }
       // }
-  },
   directives:{
     'focus':{
       inserted(el){
         el.focus();
       }
     }
-  },
-  created(){
   }
 }
 </script>

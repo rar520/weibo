@@ -6,17 +6,17 @@
       <div class="content">
         <ul>
           <li v-for="(item,i) in newlist" :key="i">
-            <router-link to="'/home/content'+newlist[i].WeiBo_id">
+            <router-link to="'/home/content'+item.WeiBo_id">
               <div class="up">
-                <div><router-link to="'/personal'+newlist[i].commentuser_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link to="'/personal'+item.commentuser_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
                 <div>
-                  <p><router-link to="'/personal'+newlist[i].commentuser_id"><span>{{newlist[i].nick_name}}</span></router-link>评论了你的微博</p>
-                  <p>{{newlist[i].comment_content.substring(0,15)}}</p>
+                  <p><router-link to="'/personal'+item.commentuser_id"><span>{{item.nick_name}}</span></router-link>评论了你的微博</p>
+                  <p>{{item.comment_content.substring(0,15)}}</p>
                 </div>
-                <div>{{newlist[i].weibo_content.substring(0,20)}}</div>
+                <div>{{item.weibo_content.substring(0,20)}}</div>
               </div>
               <div class="down">
-                <span>{{newlist[i].comment_date | dataFormat}}</span>        
+                <span>{{item.comment_date | dataFormat}}</span>        
               </div>
             </router-link>
           </li>

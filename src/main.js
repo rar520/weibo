@@ -41,8 +41,10 @@ Vue.http.options.emulateJSON=true;
 
 
 //axios
-// import axios from 'axios'
-// Vue.prototype.$http=axios;
+ import axios from 'axios'
+// Vue.config.debug = true;
+// axios.defaults.withCredentials=true;
+Vue.prototype.$axios = axios;
 
 //moment
 import moment from 'moment'
