@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       userid:'',
-      password:''
+      password:'',
     }
   },
   methods:{
@@ -30,6 +30,7 @@ export default {
           return Toast("账号密码不能为空！");
         }
         else{
+
           // var that = this;
           // $.ajax({
           //   url:'http://192.168.0.108:8080/check',
@@ -47,6 +48,7 @@ export default {
           //     console.log("出错了！");
           //   }
           // })
+
           // let self = this;
           // this.$axios.post('http://192.168.0.108:8080/check', {
           //   'userid':this.userid.trim(),'password':this.password.trim()
@@ -62,7 +64,7 @@ export default {
           //     // 这里是处理错误的回调
           //     console.log(response.status);
           // });
-
+          
           //  this.$http.post('192.168.0.108:8080/check',{'userid':this.userid.trim(),'password':this.password.trim()})
           //   .then(function(result){
           //       // console.log(result.body);

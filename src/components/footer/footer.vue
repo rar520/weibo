@@ -7,7 +7,7 @@
         </router-link>
         <router-link class="mui-tab-item-mr" to="/notify">
           <span class="mui-icon mui-icon-email">
-            <span class="mui-badge" id="badge">{{num}}</span>
+            <span class="mui-badge" id="badge">{{childmsg}}</span>
           </span>
           <span class="mui-tab-label">消息</span>
         </router-link>
@@ -29,16 +29,16 @@
 <script>
 export default {
     name:'v-footer',
+     props:{
+        childmsg:Number
+    },
     data(){
         return{
-           num:this.childmsg
+           
         }
     },
     create(){
        
-    },
-    props:{
-        childmsg:Number
     },
     methods:{
     }

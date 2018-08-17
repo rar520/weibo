@@ -24,6 +24,7 @@ import Follow from '@/components/personal/follow.vue'
 import Personal from '@/components/personal/personal.vue'
 import Fans from '@/components/personal/fans.vue'
 import Data from '@/components/personal/data.vue'
+import personalId from '@/components/personal/personalId.vue'
 
 Vue.use(Router)
 
@@ -117,6 +118,11 @@ export default new Router({
       path: '/data',
       name: 'data',
       component: Data
+    },
+    {
+      path: '/personalId',
+      name: 'personalId',
+      component: personalId
     },
     {
       path:'/footer',

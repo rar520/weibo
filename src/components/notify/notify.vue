@@ -48,7 +48,7 @@
           <span class="mui-tab-label">我</span>
         </router-link>
       </nav> -->
-      <v-footer :childmsg="num"></v-footer>
+      <v-footer :childmsg='num'></v-footer>
     </div>
 </template>
 <script>

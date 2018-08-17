@@ -119,8 +119,7 @@
         <span class="mui-icon mui-icon-plusempty"></span>
       </router-link>
       <router-link class="mui-tab-item-mr" to="/search">
-        <span class="mui-icon mui-icon-search">
-        </span>
+        <span class="mui-icon mui-icon-search"></span>
         <span class="mui-tab-label">发现</span>
       </router-link>
       <router-link class="mui-tab-item-mr" to="/personal">
