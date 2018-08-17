@@ -57,6 +57,8 @@ import '../static/mui/css/mui.css'
 import '../static/mui/css/icons-extra.css'
 import '../static/css/common.css'
 
+import '../static/js/jquery.min.js'
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

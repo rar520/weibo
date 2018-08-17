@@ -16,6 +16,7 @@
 
 <script>
 import { Toast } from "mint-ui"; 
+import '../../../static/js/jquery.min.js'
 export default {
   name: 'login',
   data () {
@@ -30,71 +31,6 @@ export default {
           return Toast("账号密码不能为空！");
         }
         else{
-
-          // var that = this;
-          // $.ajax({
-          //   url:'http://192.168.0.108:8080/check',
-          //   type:'post',
-          //   data : {userid : this.userid,password : this.password},
-          //   dataType:'json',
-          //   xhrField:{
-          //     withCredenttials:true   //前端设置是否带cookie
-          //   },
-          //   crossDomain:true,
-          //   success:function(goods){
-          //     console.log(goods);
-          //   },
-          //   error:function(){
-          //     console.log("出错了！");
-          //   }
-          // })
-
-          // let self = this;
-          // this.$axios.post('http://192.168.0.108:8080/check', {
-          //   'userid':this.userid.trim(),'password':this.password.trim()
-          // }, {
-          //     headers: {
-          //       "Content-Type":"application/json;charset=utf-8"
-          //     },
-          //     withCredentials : true
-          // }).then(function(response) {
-          //     // 这里是处理正确的回调
-          //     console.log(response.body);
-          // }).catch( function(response) {
-          //     // 这里是处理错误的回调
-          //     console.log(response.status);
-          // });
-          
-          //  this.$http.post('192.168.0.108:8080/check',{'userid':this.userid.trim(),'password':this.password.trim()})
-          //   .then(function(result){
-          //       // console.log(result.body);
-          //       if(result.body.status == 1){
-          //         console.log("登陆成功!");
-          //       }
-          //       else{
-          //         console.log(result.body.status);
-          //         return Toast("账号或密码错误！");
-          //       }
-          //   })
-        
-          // this.$axios({
-          //   method:'post',
-          //   url:'http://192.168.0.108:8080/check',
-          //   data:{
-          //     userid:this.userid.trim(),
-          //     password:this.password.trim()
-          //   }
-          // }).then((result)=>{
-          //   if(result.body.status == 1){
-          //       console.log("登陆成功!");
-          //     }
-          //     else{
-          //       console.log(result.body.status);
-          //       return Toast("账号或密码错误！");
-          //     }
-          // })
-          //把帐户名和密码 发送给后台
-
           this.$http.post('http://192.168.0.108:8080/check',{
             'userid':this.userid,'password':this.password
           })
@@ -104,18 +40,28 @@ export default {
           .catch(function (error) {
             console.log("error");
           });
-
-
-            // this.$http.post("/api/check",{
-            //   params:{}
-            // })
-            // .then((result)=>{
-            //   console.log(result.data);
-            // }).catch((error)=>{
-            //   console.log(error);
-            // });
         }
       }
+
+    // request(){
+    //   var _this=this;
+    //   $.ajax({
+    //     xhrFields:{
+    //       withCreddentials:true
+    //     },
+    //     type: 'post',
+    //     url:'http://192.168.0.108:8080/check',
+    //     dataType:'json',
+    //     data:{'userid':this.userid,'password':this.password},
+    //     success:function(res){
+    //       console.log(res.body)
+    //     },
+    //     error(err){
+    //       console.log(err)
+    //     }
+    //   })
+    // }
+
   },
          
           
