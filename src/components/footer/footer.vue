@@ -14,7 +14,7 @@
         <router-link class="mui-tab-item-pb" to="/publish">
           <span class="mui-icon mui-icon-plusempty"></span>
         </router-link>
-        <router-link class="mui-tab-item-mr" to="/search">
+        <router-link class="mui-tab-item-mr" to="/searchpage">
           <span class="mui-icon mui-icon-search">
           </span>
           <span class="mui-tab-label">发现</span>

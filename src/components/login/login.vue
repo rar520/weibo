@@ -1,22 +1,19 @@
 <template>
     <div>
-      <h1>请输入账户名和密码</h1> 
+      <h1>请输入账号和密码</h1> 
       <router-link to="/before_login">
         <span class="mui-icon mui-icon-closeempty"></span>
       </router-link>
       <form action="">
-        <input type="text" placeholder="请输入账户名" v-model="userid" v-focus/>
+        <input type="text" placeholder="请输入账号" v-model="userid" v-focus/>
         <input type="password" placeholder="请输入密码" v-model="password" />
-        <!-- <router-link to="/home"> -->
-          <input type="submit" value="登录" id="login" @click="postInfro" />
-        <!-- </router-link> -->
+        <input type="button" value="登录" id="login" @click="postInfro" />
       </form>
     </div>
 </template>
 
 <script>
 import { Toast } from "mint-ui"; 
-import '../../../static/js/jquery.min.js'
 export default {
   name: 'login',
   data () {
@@ -31,50 +28,27 @@ export default {
           return Toast("账号密码不能为空！");
         }
         else{
+          // 把帐户名和密码 发送给后台
           this.$http.post('http://192.168.0.108:8080/check',{
             'userid':this.userid,'password':this.password
           })
           .then(function (result) {
-            console.log(result.body.status);
-          })
-          .catch(function (error) {
-            console.log("error");
+            if(result.body.status == 1){
+              console.log(result.body.status);
+              this.$router.push('/home');
+            }
+            else{
+              console.log(result.body.status);
+              return Toast("您登录的未注册！");
+            }
           });
+          // .catch(function (error) {
+          //   console.log("error");
+          // })
+          
         }
       }
-
-    // request(){
-    //   var _this=this;
-    //   $.ajax({
-    //     xhrFields:{
-    //       withCreddentials:true
-    //     },
-    //     type: 'post',
-    //     url:'http://192.168.0.108:8080/check',
-    //     dataType:'json',
-    //     data:{'userid':this.userid,'password':this.password},
-    //     success:function(res){
-    //       console.log(res.body)
-    //     },
-    //     error(err){
-    //       console.log(err)
-    //     }
-    //   })
-    // }
-
   },
-         
-          
-      // blurUserid(){
-      //   if(this.userid.trim().length === 0){
-      //     return Toast("账号不能为空！");
-      //   }
-      // },
-      // blurPassword(){
-      //   if(this.password.trim().length === 0){
-      //       return Toast("密码不能为空！");
-      //   }
-      // }
   directives:{
     'focus':{
       inserted(el){

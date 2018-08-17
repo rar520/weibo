@@ -16,8 +16,6 @@ import notify from '@/components/notify/notify.vue'
 
 import footer from '@/components/footer/footer.vue'
 
-import search from '@/components/search/search.vue'
-import bill from '@/components/search/bill.vue'
 import searchpage from '@/components/search/searchpage.vue'
 
 import Follow from '@/components/personal/follow.vue'
@@ -83,16 +81,6 @@ export default new Router({
       path: '/notify',
       name: 'notify',
       component: notify
-    },
-    {
-      path: '/search',
-      name: 'search',
-      component: search
-    },
-    {
-      path: '/bill',
-      name: 'bill',
-      component: bill
     },
     {
       path: '/searchpage',

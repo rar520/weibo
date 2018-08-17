@@ -1,13 +1,13 @@
 <template>
   <div class="like-container">
-   <div class="like-list">
+   <div class="like-list" v-for="(item,index) in likeList" :key="index">
      <div class="like-list-image">
-       <img src="../../../static/img/touxiang1.jpg" alt="点赞用户1">
+       <img :src="item.headImage" alt="点赞用户1">
      </div>
      <div class="like-list-content">
        <div class="like-list-user">
-         <h3>小小白</h3>
-         <p>一个前端的初学者</p>
+         <h3>{{item.nickName}}</h3>
+         <p>{{item.introduce}}</p>
        </div>
        <div class="icon">
          <img src="../../../static/img/dianzan.jpg" alt="赞"><span>赞</span>
@@ -46,7 +46,33 @@
 </template>
 <script>
 export default {
-
+  data () {
+    return{
+      likeList : [],
+      weiboId : this.$route.params.id,
+      //用来保存点赞的状态
+      likeStatus : false
+    }
+  },
+  methods : {
+    //获取点赞列表
+    getLikeList () {
+      this.$http.get('user/praise/selectpraise?weiboid='+this.weiboId)
+      .then(result => {
+        if(result.body.status==1) {
+          this.likeList=result.body.obj;
+        }
+      })
+    },
+      //替换组件时的样式变化
+      toggleClass() {
+      this.likeStatus=!this.likeStatus
+    }
+  },
+  created () {
+    this.getLikeList();
+  },
+  props : ["id"]
 }
 </script>
 <style lang="scss" scoped>
@@ -72,16 +98,19 @@ export default {
       justify-content: space-between;
       align-items:center;
       border-bottom:1px solid #949494;
+      line-height: 20px;
       .like-list-user {
         margin-left: 10px;
           h3 {
           font-size:16px;
           color: #292929;
           font-weight: bold;
+          margin-bottom: 10px;
           }
           p {
             font-size:14px;
             color:#939393;
+            margin-bottom: 10px;
           }
       }
       .icon {
@@ -95,7 +124,6 @@ export default {
     }
   }
 }
-
 </style>
 
 

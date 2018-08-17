@@ -16,12 +16,12 @@
               <img src="../../../static/img/touxiang1.jpg" alt="萌妹子">
             </div>
             <div class="mui-media-body">
-              张欢
-              <p>2分钟前<span class="device">来自微博weibo.com</span></p>
+              {{weibocontent.nickName}}
+              <p>{{weibocontent.releasetime}}<span class="device">来自微博weibo.com</span></p>
             </div>
           </div>
           <div class="mui-card-content">
-              我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据
+             {{weibocontent.weibo_content}}
           </div>
       </div>
       <div class="brContainer"></div>
@@ -39,7 +39,7 @@
           </li> -->
         </ul>
         <div id="content" class="contnet">
-          <component :is='currnetView' keep-alive></component>
+          <component :is='currnetView' :id="dataId" keep-alive></component>
         </div>
         <!-- <div id="content" class="content">
           <div>转发的列表</div>
@@ -49,45 +49,65 @@
     </div>
     </div>
     <!-- 中间内容区域 -->
-    <!-- 底部tabbar区域 -->
-    <div class="mui-card-footer">
-      <router-link to="#" class="mui-card-link"><span class="mui-icon-mr mui-icon-redo">转发</span></router-link>
-      <router-link to="/home/content/comment" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">评论</span></router-link>
-      <router-link to="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like">赞</span></router-link>
-    </div>
-    <!-- 底部tabbar区域 -->
   </div>
 </template>
 <script>
 import Commenting from '../subcomponent/comment.vue'
 import Like from '../subcomponent/like.vue'
-import Transmit from '../subcomponent/transmit.vue'
 export default {
     data () {
       return {
           //用来保存tab的数据
-          tablist : [
-            {transmit : 'tab1',title : "转发",num : 239},
-            {comment : 'tab2',title : "评论",num : 199},
-            {like : 'tab3',title : "赞",num : 99}
-          ],
+          tablist : [],
           //来保存被点击的下标
-          isactived:1,
+          isactived:0,
           //来保存的子组件的name
-          currnetView : 'tab2'
+          currnetView : 'tab1',
+          //用来保存点击微博的id值
+          dataId : this.$route.params.id,
+          //保存一条微博的信息
+          weibocontent : {},
       }
     },
     methods : {
-      //替换子组件,传递参数来改变展示不同的子组件
+      //替换子组件,I传递参数来改变展示不同的子组件
       toggle(arg) {
         this.currnetView=arg;
-      }
+      },
+    // enterWeiBocontent () {
+    //   var weiboId={id : this.dataId}
+    //   this.$store.commit('showContent',weiboId)
+    // }
+    //展示一条微博的内容的方法
+    showContent() {
+      this.$http.get('homepage/homepage').then(result => {
+        if(result.body.status==1) {
+          var weibocontentlist=result.body.object;
+          weibocontentlist.forEach(element => {
+            if(element.WeiBo_id==this.dataId) {
+              this.weibocontent=element;
+              // console.log(this.weibocontent)
+            }
+          });
+        }
+      })
+    },
+    //改变tablist的方法
+    changeTabList () {
+      this.tablist=[
+        {comment : 'tab1',title : "评论",num : this.weibocontent.commentCount},
+        {like : 'tab2',title : "赞",num : this.weibocontent.likeCount}
+      ]
+    }
+    },
+    created () {
+      this.showContent();
+      this.changeTabList();
     },
     //把子组件挂在到父组件
     components : {
-      "tab1" : Transmit,
-      "tab2" : Commenting,
-      "tab3" : Like
+      "tab1" : Commenting,
+      "tab2" : Like
     }
 }
 </script>
@@ -137,6 +157,7 @@ export default {
   }
   .mui-card-content {
     padding: 5px;
+    line-height: 22px;
   }
   .brContainer {
     height: 17px;
@@ -173,41 +194,6 @@ export default {
       display:block;
     }
   }
-
-
-
-// 底部区域的样式
-  .mui-card-footer {
-      width:100%;
-      background: #efefef;
-      position:fixed;
-      bottom:-1px;
-      justify-content: space-around;
-      z-index: 99;
-    .mui-card-link {
-      color:#636363;
-      .mui-icon-mr {
-        font-family: Muiicons;
-        font-size: 16px;
-        font-weight: normal;
-        font-style: normal;
-        line-height: 1;
-        display: inline-block;
-        text-decoration: none;
-        -webkit-font-smoothing: antialiased;
-    }
-    .mui-icon-extra-mr {
-        font-family: MuiiconSpread;
-        font-size: 16px;
-        font-weight: normal;
-        font-style: normal;
-        line-height: 1;
-        display: inline-block;
-        text-decoration: none;
-        -webkit-font-smoothing: antialiased;
-  }
-  }
-}
 </style>
 
 

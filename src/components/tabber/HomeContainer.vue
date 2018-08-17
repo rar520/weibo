@@ -7,26 +7,25 @@
     </mt-header>
     <!--头部Header区域-->
     <!-- 中间content区域 -->
-      <div class="mui-card">
+      <router-link class="mui-card" v-for="item   in weibodata" :key="item.WeiBo_id" :to="'/home/content/'+item.WeiBo_id" tag="div">
           <div class="mui-card-header mui-card-media">
             <div class="touxiang-image">
               <img src="../../../static/img/touxiang1.jpg" alt="萌妹子">
             </div>
             <div class="mui-media-body">
-              <h3>张欢</h3>
-              <p>2分钟前<span class="device">来自微博weibo.com</span></p>
+              <h3>{{item.nickName}}</h3>
+              <p>{{item.releasetime}}<span class="device">来自微博weibo.com</span></p>
             </div>
           </div>
           <div class="mui-card-content">
-              我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据
+              {{item.weibo_content}}
           </div>
           <div class="mui-card-footer">
-            <router-link to="#" class="mui-card-link"><span class="mui-icon-mr mui-icon-redo">239</span></router-link>
-            <router-link to="/home/content" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">199</span></router-link>
-            <router-link to="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like">99</span></router-link>
+            <router-link :to="'/home/content/'+item.WeiBo_id" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">{{item.commentCount}}</span></router-link>
+            <router-link to="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like" @click="toggleClass(item.WeiBo_id,item.user_id,item.likeCount),addlike(),select(item)" :class="{'actived' : item.selected}">{{item.likeCount}}</span></router-link>
           </div>
-      </div>
-      <div class="mui-card">
+      </router-link>
+      <!-- <div class="mui-card">
           <div class="mui-card-header mui-card-media">
             <div class="touxiang-image">
               <img src="../../../static/img/touxiang2.jpg" alt="大帅哥">
@@ -101,38 +100,77 @@
             <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">99</span></a>
             <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like">99</span></a>
           </div>
-      </div>
+      </div> -->
     <!-- 中间content区域 -->
-    <!--底部Tabber区域-->
-    <nav class="mui-bar mui-bar-tab">
-      <router-link class="mui-tab-item-mr" to="/home">
-        <span class="mui-icon mui-icon-home"></span>
-        <span class="mui-tab-label">首页</span>
-      </router-link>
-      <router-link class="mui-tab-item-mr" to="/notify">
-        <span class="mui-icon mui-icon-email">
-          <span class="mui-badge" id="badge">0</span>
-        </span>
-        <span class="mui-tab-label">消息</span>
-      </router-link>
-      <router-link class="mui-tab-item-pb" to="/publish">
-        <span class="mui-icon mui-icon-plusempty"></span>
-      </router-link>
-      <router-link class="mui-tab-item-mr" to="/search">
-        <span class="mui-icon mui-icon-search"></span>
-        <span class="mui-tab-label">发现</span>
-      </router-link>
-      <router-link class="mui-tab-item-mr" to="/personal">
-        <span class="mui-icon mui-icon-person"></span>
-        <span class="mui-tab-label">我</span>
-      </router-link>
-    </nav>
-    <!--底部Tabber区域-->
+    <v-footer :childmsg='num'></v-footer>
   </div>
 </template>
 <script>
+import footer from '../footer/footer.vue';
 export default {
+  data () {
+    return {
+      //用来保存点赞的状态
+        likeStatus : false,
+        weibodata : [],
+        num : 0
+        //保存用户的id
+        // useriddata : [],
+        // weiboiddata : [],
+        // weibolikedata : []
+    }
+  },
+  components:{
+    'v-footer':footer
+  },
+  methods : {
+    //获取所有微博的所有正文
+    getAttentionData() {
+      this.$http.get('homepage/homepage')
+      .then(result=> {
+        if(result.body.status==1){
+          this.weibodata=result.body.object
+         console.log(this.weibodata)
+      // this.weibodata.forEach(element => {
+      //      this.weiboiddata=this.weiboiddata.concat(element.WeiBo_id)
+      //      this.useriddata=this.useriddata.concat(element.user_id)
+      //      this.weibolikedata=this.weibolikedata.concat(element.likeCount)
+      //    });
+      //      console.log(this.weiboiddata)
+      //      console.log(this.useriddata)
+      //      console.log(this.weibolikedata)
+        }
+      })
+    },
+    //点赞的变化处理
+    toggleClass(weiboid,userid,likenum) {
+      this.likeStatus=!this.likeStatus
+      this.$http.post('user/praise/weibo',{
+        userid : userid,
+        weiboid : weiboid
+      }).then(result => {
+        if(result.body.status==1){
 
+        }
+      })
+    },
+    select (item) {
+      console.log(item)
+      item.selected=!item.selected
+    },    
+    getInfo(){
+      this.$http.get('user/massage').then(result=>{
+        if(result.body.status==1){
+          this.num=result.body.object.length;
+        }
+      })
+    }
+
+  },
+  created () {
+    this.getAttentionData();
+    this.getInfo();
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -187,11 +225,20 @@ export default {
   }
     .mui-card-content {
     padding: 5px;
+    line-height: 22px;
   }
   .mui-card-footer {
+    justify-content: space-around;
     .mui-card-link {
       color:#636363;
-      .mui-icon-mr {
+  }
+      .noactived {
+        color: #2b2b2b;
+      }
+      .actived {
+      color:#ff8200;
+    }
+   .mui-icon-mr {
         font-family: Muiicons;
         font-size: 16px;
         font-weight: normal;
@@ -211,52 +258,6 @@ export default {
         text-decoration: none;
         -webkit-font-smoothing: antialiased;
   }
-  }
-}
-/* 底部区域样式 */
-.mui-bar {
-  background-color: #fafafa;
-  height: 50px;
-  bottom: -1px;
-}
-.mui-bar-tab .mui-tab-item-mr.router-link-active {
-    color: #2b2b2b;
-}
-.mui-bar-tab .mui-tab-item-mr {
-    display: table-cell;
-    overflow: hidden;
-    width: 1%;
-    height: 50px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #939393;
-}
-.mui-bar-tab .mui-tab-item-pb {
-    display: table-cell;
-    overflow: hidden;
-    width: 1%;
-    height: 50px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #fff;
-    background: #ff8200;
-}
-.mui-bar-tab .mui-tab-item-mr .mui-icon {
-    top: 3px;
-    width: 24px;
-    height: 24px;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-.mui-bar-tab .mui-tab-item-mr .mui-icon ~ .mui-tab-label {
-    font-size: 11px;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 </style>
 

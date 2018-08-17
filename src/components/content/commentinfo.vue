@@ -1,43 +1,37 @@
 <template>
   <div class="commentinfo-container">
     <!-- 头部header区域 -->
-    <mt-header title="99条回复" fixed>
-      <router-link to="/home/content" slot="left">
-      <mt-button icon="back"></mt-button>
-      </router-link>
+    <mt-header title="查看总回复" fixed>
+      <mt-button icon="back" slot="left" @click="goback"></mt-button>
     </mt-header>
     <!-- 头部header区域 -->
     <!-- 评论回复详情 -->
-    <div class="commentself">
+    <div class="commentself" v-for="(item,index) in onecommentdata" :key="index">
       <div class="commentself-image">
         <img src="../../../static/img/touxiang1.jpg" alt="评论者">
       </div>
       <div class="commentself-user">
-        <h3>张欢</h3>
-        <span>7-28&nbsp;23:36</span>
-      </div>
-      <div class="commentself-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like">176</span>&nbsp;
-        <span class="mui-icon-extra-mr mui-icon-extra-comment"></span>
+        <h3>{{item.comemntnick_name}}</h3>
+        <span>{{item.comment_date | dataFormat}}</span>
       </div>
     </div>
-    <div class="commentself-content">
-      <p><span>张欢</span>:张欢的评论张欢的评论张欢的评论</p>
-      <router-link to="/home/content" tag="a">查看原微博</router-link>
+    <div class="commentself-content" v-for="(item,index) in onecommentdata" :key="index">
+      <p><span>{{item.comemntnick_name}}</span>:{{item.comment_content}}</p>
+      <a @click="goback">查看原微博</a>
     </div>
     <!-- 评论回复详情 -->
     <!-- 评论的评论列表区域 -->
-    <div class="comment-commentlist">
+    <div class="comment-commentlist" v-for="(item,index) in commentsublist" :key="index">
       <div class="comment-commentlist-image">
         <img src="../../../static/img/touxiang1.jpg" alt="评论者">
       </div>
       <div class="comment-commentlist-user">
-        <h3>韩雪小姐姐</h3>
-        <span>8-2&nbsp;21:02</span>
-        <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
+        <h3>{{item.commentsnick_name}}</h3>
+        <span>{{item.comments_date | dataFormat}}</span>
+        <p>{{item.comments_content}}</p>
       </div>
       <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like"></span>
+        <span class="mui-icon-extra-mr mui-icon-extra-like" @click="postcommentslike(item.user_id,item.comment_id),item.likecount++">{{item.likecount}}</span>
       </div>
     </div>
     <div class="comment-commentlist">
@@ -50,7 +44,7 @@
         <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
       </div>
       <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like"></span>
+        <span class="mui-icon-extra-mr mui-icon-extra-like">1997</span>
       </div>
     </div>
     <div class="comment-commentlist">
@@ -63,7 +57,7 @@
         <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
       </div>
       <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like"></span>
+        <span class="mui-icon-extra-mr mui-icon-extra-like">1997</span>
       </div>
     </div>
     <div class="comment-commentlist">
@@ -76,7 +70,7 @@
         <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
       </div>
       <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like"></span>
+        <span class="mui-icon-extra-mr mui-icon-extra-like">1997</span>
       </div>
     </div>
     <div class="comment-commentlist">
@@ -89,20 +83,88 @@
         <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
       </div>
       <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like"></span>
+        <span class="mui-icon-extra-mr mui-icon-extra-like">1997</span>
       </div>
     </div>
     <!-- 评论的评论列表区域 -->
     <!-- 底部回复评论 -->
       <div class="footer-wrap">
-        <input placeholder="回复评论" type="text">
+        <input placeholder="回复评论" type="text" v-model="commentsdata">
+        <input type="button" value="发送" @click="postCommentsMethod">
       </div>
     <!-- 底部回复评论 -->
   </div>
 </template>
 <script>
+import { Toast } from 'mint-ui'
 export default {
+  data () {
+    return {
+        commentId : this.$route.params.id,
+        //保存评论下的评论列表
+        commentsublist : [],
+        //显示评论列表上面的内容commentsublist
+        onecommentdata : [],
+        //保存回复评论的数据
+        commentsdata : ''
+    }
+  },
+  created () {
+    this.getContentSubAllInfo();
+  },
+  methods : {
+    goback() {
+      //这里的$router相当于history
+      this.$router.go(-1)
+    },
+    getContentSubAllInfo () {
+      this.$http.get('comments/show?showid='+this.commentId)
+      .then(result => {
+        if(result.body.status==1) {
+          this.commentsublist=result.body.object;
+          console.log(this.commentsublist)
+          this.onecommentdata=this.commentsublist[0].list1;
+          console.log(this.onecommentdata)
+        }
+      })
+    },
+    //发送表单的内容
+    postCommentsMethod () {
+      if(this.commentsdata.trim().length==0) {
+        return Toast('回复评论不能为空!')
+      }
+      this.$http.post('user/send/comments?commentid='+this.commentId,{
+        comments_content : this.commentsdata.trim()
+      })
+      .then(result => {
+        if(result.body.status==1) {
+          //评论评论者的信息
+           var cmts={
+            head_image : '评论用户的头像',
+            commentsnick_name : "评论用户的昵称",
+             comments_content : this.commentsdata.trim(),
+             comments_date : Date().now,
+             likecount : 0
+           }
+          this.commentsublist.unshift(cmts)
+          this.commentsdata=''
+        }
+      })
+    },
+    //评论的评论点赞
+       postcommentslike(userid,commentid) {
+       console.log(userid)
+       console.log(commentid)
+      this.$http.post('user/praise/comments',{
+        userid : userid,
+        commentid : commentid
+      }).then(result => {
+        if(result.body.status==1) {
 
+        }
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -143,10 +205,11 @@ export default {
       }
     }
     .commentself-user {
-      width: 63%;
+      width: 84%;
       h3 {
         font-size:16px;
         font-weight: bold;
+        margin-bottom: 10px;
       }
       span {
         font-size:15px;
@@ -160,6 +223,7 @@ export default {
     padding-bottom:20px;
     p {
       font-size:18px;
+      margin-bottom: 10px;
     }
     span {
       color: #5681b1;
@@ -192,10 +256,15 @@ export default {
       h3 {
         font-size:14px;
         font-weight: bold;
+        margin-bottom: 10px;
       }
       span {
         font-size:14px;
         color: #929292;
+      }
+      p {
+        margin: 10px 0;
+        line-height: 20px;
       }
     }
   }
@@ -207,8 +276,10 @@ export default {
   bottom: 0;
   background-color: #f6f6f6;
   padding: 5px;
+  display: flex;
   input {
     border-radius: 10px;
+    margin-left: 8px;
   }
 }
   .mui-icon-extra-mr {

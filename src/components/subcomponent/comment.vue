@@ -1,23 +1,24 @@
 <template>
   <div class="comment-container">
-    <div class="comment-list">
+    <div class="comment-list" v-for="(item,index) in commentList" :key="index">
       <div class="comment-list-image">
         <img src="../../../static/img/touxiang1.jpg" alt="萌妹子">
       </div>
       <div class="comment-list-body">
-        <h3>张欢</h3>
-        <p>张欢的评论张欢的评论张欢的评论</p>
-        <router-link to="/home/content/commentinfo" class="comment-list-body-content" tag="div">
-          <p><span>韩雪小姐姐:</span>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
-          <p><span>吴彦祖小哥:</span>哇,你就是西邮吴彦祖啊,久仰大名!!!</p>
-          <p><span>共99条回复&nbsp;></span></p>
+        <h3>{{item.commentnick_name}}</h3>
+        <p>{{item.comment_content}}</p>
+        <router-link :to="'/home/content/commentinfo/'+item.comment_id" class="comment-list-body-content" tag="div" :commentlistall="commentList">
+          <div v-for="(item,index) in commentSubList" :key="index">
+            <p><span>{{item.commentsnick_name}}:</span>{{item.comments_content}}</p>
+          </div>
+          <p><span>查看总回复&nbsp;></span></p>
         </router-link>
         <div class="comment-list-time">
-          <span>7-28&nbsp;23:36</span>
+          <span>{{item.comment_date | dataFormat}}</span>
           <div class="comment-list-icon">
             <span class="mui-icon-mr mui-icon-redo"></span>
             <span class="mui-icon-extra-mr mui-icon-extra-comment"></span>
-            <span class="mui-icon-extra-mr mui-icon-extra-like">176</span>
+            <span class="mui-icon-extra-mr mui-icon-extra-like" @click="toggleClass(item.user_id,item.comment_id),item.likecount++" :class="{'actived' : likeStatus,'noactived' : !likeStatus}">{{item.likecount}}</span>
           </div>
         </div>
       </div>
@@ -32,7 +33,7 @@
         <div class="comment-list-body-content">
           <p><span>韩雪小姐姐:</span>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
           <p><span>吴彦祖小哥:</span>哇,你就是西邮吴彦祖啊,久仰大名!!!</p>
-          <p><span>共99条回复&nbsp;></span></p>
+          <p><span>查看总回复&nbsp;></span></p>
         </div>
         <div class="comment-list-time">
           <span>7-28&nbsp;23:36</span>
@@ -54,7 +55,7 @@
         <div class="comment-list-body-content">
           <p><span>韩雪小姐姐:</span>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
           <p><span>吴彦祖小哥:</span>哇,你就是西邮吴彦祖啊,久仰大名!!!</p>
-          <p><span>共99条回复&nbsp;></span></p>
+          <p><span>查看总回复&nbsp;></span></p>
         </div>
         <div class="comment-list-time">
           <span>7-28&nbsp;23:36</span>
@@ -66,13 +67,101 @@
         </div>
       </div>
     </div>
+    <!-- 底部tabbar区域 -->
+    <div class="mui-card-footer">
+      <input type="text" v-model="postcommentdata" placeholder="请输入评论内容">
+      <input type="button" value="发表评论" @click="postcommentMethod">
+    </div>
+    <!-- 底部tabbar区域 -->
   </div>
 </template>
 <script>
 // import '../../../static/mui/css/mui.css'
 // import '../../../static/mui/css/icons-extra.css'
+import { Toast } from 'mint-ui'
 export default {
+  data () {
+    return {
+        //评论的点赞状态
+        likeStatus : false,
+        //用来保存点击微博的id值
+        // dataId : this.$route.params.id,
+        //保存一条微博的信息
+        weibocontent : {},
+        //保存评论的所有信息
+        commentList : [],
+        //保存评论的评论信息
+        commentSubList :[],
+        //用来保存点赞的状态
+        likeStatus : false,
+        //保存表单提交的数据
+        postcommentdata : ''
+    }
+  },
+  props : ["id"],
+  methods : {
+      toggleClass() {
+      this.likeStatus=!this.likeStatus
+    },
+    showComment() {
+      this.$http.get('comment/show?weiboid='+this.id).then(result => {
+        if(result.body.status==1) {
+          //获取评论列表的每一项得到的是数组
+          this.commentList=result.body.object;
+          // console.log(this.commentList)
+          //遍历得到的数组的每一项list1,又得到list1数组
+          this.commentList.forEach(element => {
+            this.commentSubList=element.list1
+          });
+        }
+      })
+    },
+      //替换组件时的样式变化
+      toggleClass() {
+      this.likeStatus=!this.likeStatus
+    },
+    //发送表单的内容
+    postcommentMethod () {
+      if(this.postcommentdata.trim().length==0) {
+        return Toast('评论的内容不能为空!')
+      }
+      this.$http.post('user/send/comment?weiboid='+this.id,{
+        comment_content : this.postcommentdata.trim()
+      })
+      .then(result => {
+        if(result.body.status==1) {
+          //发布评论者的信息
+           var cmt={
+            head_image : '登录用户的头像',
+            commentnick_name : "登录用户的昵称",
+             comment_content : this.postcommentdata.trim(),
+             comment_date : Date().now,
+             likecount : 0
+           }
+          //发布评论者的信息下的评论
+          var cmts=[]
+          this.commentList.unshift(cmt)
+          this.commentSubList=cmts
+          this.postcommentdata=''
+        }
+        console.log(result.body)
+      })
+    },
+    //评论点赞
+    postcommentlike(userid,commentid) {
+      this.$http.post('user/praise/comment',{
+        userid : userid,
+        commentid : commentid
+      }).then(result => {
+        if(result.body.status==1) {
 
+        }
+      })
+    }
+  },
+  created () {
+    this.showComment();
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -98,10 +187,13 @@ export default {
         font-size: 13px;
         font-weight: bold;
         color:#858585;
+        margin-bottom: 10px;
       }
       p {
         font-size: 15px;
         color: #000;
+        margin-bottom: 10px;
+        line-height: 22px;
       }
       .comment-list-body-content {
         background-color: #efefef;
@@ -122,7 +214,7 @@ export default {
     display:flex;
     justify-content: space-between;
     border-bottom: 1px solid #949494;
-    padding-bottom: 5px;
+    padding: 5px 0px;
     span {
       font-size: 13px;
       color: #949494;
@@ -134,6 +226,12 @@ export default {
       display:flex;
       justify-content:space-between;
       align-items: center;
+      .noactived {
+        color: #636363;
+      }
+      .actived {
+      color:#ff8200;
+    }
       .mui-icon-mr {
         font-family: Muiicons;
         font-size: 13px;
@@ -155,6 +253,20 @@ export default {
         -webkit-font-smoothing: antialiased;
   }
   }
+}
+// 底部区域的样式
+  .mui-card-footer {
+      width:100%;
+      background: #efefef;
+      position:fixed;
+      bottom:-1px;
+      justify-content: space-around;
+      z-index: 99;
+      input {
+        border-radius: 10px;
+        margin-bottom: 0;
+        margin-left: 10px;
+      }
 }
 </style>
 

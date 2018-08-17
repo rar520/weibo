@@ -1,26 +1,23 @@
 <template>
     <div>
         <header>
+            <p>正在编辑</p>
+            <p id="nickname"></p>
             <span>返回</span>
-            <span>正在编辑</span>
-            <span>soda</span>
-            <div>
+            <div @click="postWeiboContent">
                 发送
             </div>
         </header>
         <main>
-            <textarea name="" id="" placeholder="分享我的故事......"></textarea>
+            <textarea placeholder="分享我的故事......" maxlength="160" v-model="weiboContent"></textarea>
             <div class="input">
                 <div class="export">
                     <ul class="clearfix">
                         <li>
-                            <span class="mui-icon mui-icon-image"></span>
-                        </li>
-                        <li>
-                            <span class="mui-icon-extra mui-icon-extra-at"></span>
-                        </li>
-                        <li>
-                            <span class="mui-icon-extra mui-icon-extra-heart"></span>
+                            <span class="mui-icon mui-icon-image">
+                                <input type="file" id="file" 
+                                accept="image/*" @change="imgChange"/>
+                            </span>
                         </li>
                         <li>
                             <span class="mui-icon mui-icon-plusempty"></span>
@@ -29,49 +26,81 @@
                 </div>
             </div>
         </main>
-        
     </div>
 </template>
 
 <script>
+import { Toast } from "mint-ui";
 export default{
     name: 'publish',
     data(){
         return{
-
+            weiboContent:''
         }
-    }
-}
+    },
+    methods:{
+        //发布微博文字内容
+        postWeiboContent(){
+            if(this.weiboContent.trim().length === 0){
+                return Toast("发布内容不能为空！");
+            }else{
+                this.$http.post("user/publish/insert",{'weiboContent':this.weiboContent})
+                .then(function(result){
+                    if(result.body.status == 1){
+                        console.log("发送成功！");
+                        this.$router.push('/home');
+                    }
+                })
+            }
+        },
+        // getPic(){
+        //     var  file_obj = document.getElementById("file");
+        //         var files = file_obj.files;
+        //         if(undefined == file){
+        //             return ;
+        //         }
+        //         var r = new FileReader(); 
+        //         r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
+        //         r.onload = function(e) {
+        //             var base64 = e.target.result;
+        //             console.log(base64);
+        //             img.setAttribute('src',base64);
+        //         }
+        // }   
+    },
+    created(){
+        //获取昵称
+        this.$http.get('user/publish/nickname').then((result)=>{
+            var nickname = document.getElementById('nickname');
+            nickname.innerHTML = result.body.object;
+        })
+    } 
+}  
 </script>
 
 <style scpoed>
- /* @import '../../../static/css/common.css'; */
  header{
     width:100%;
     height:8vh;
-    padding-top:4vh;
     position:relative;
     background-color:#f9f9f9;
     border-bottom:1px #d0d0d0 solid;
+}
+header p:nth-of-type(1){
+    line-height:5vh;
+    text-align:center;
+    font-size:18px;
+}
+header p:nth-of-type(2){
+    text-align:center;
+    font-size:20px;
+    line-height:2vh;
 }
  header span:nth-of-type(1){
     font-size:18px;
     position:absolute;
     top:4vh;
     left:5%;
- }
- header span:nth-of-type(2){
-    font-size:18px;
-    position:absolute;
-    top:2vh;
-    left:40%;
- }
- header span:nth-of-type(3){
-    font-size: 20px;
-    position: absolute;
-    top: 5vh;
-    left: 43%;
-    color: #848080;
  }
  header div{
     width: 15%;
@@ -103,6 +132,7 @@ export default{
     width:25%;
     float:left;
     padding-top:2vh;
+    text-align:center;
  }
  main .input .export ul li span{
     font-size:25px;

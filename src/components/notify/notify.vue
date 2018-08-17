@@ -1,8 +1,10 @@
 <template>
     <div>
+      <!-- 头部 -->
       <header>
         <p>通知</p>
       </header>
+      <!-- 内容 -->
       <div class="content">
         <ul>
           <li v-for="(item,i) in newlist" :key="i">
@@ -24,6 +26,7 @@
           <input type="button" value="已全部加载完成" v-show="flag2" id="btn" disabled>
         </ul>
       </div>
+      <!-- 底部 -->
       <v-footer :childmsg='num'></v-footer>
     </div>
 </template>
