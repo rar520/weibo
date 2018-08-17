@@ -12,15 +12,15 @@
             <ul>
                 <li>
                     <h5>昵称</h5>
-                    <p>素团子</p>
+                    <input type="text" v-model="nick_name">
                 </li>
                 <li>
                     <h5>简介</h5>
-                    <p>我是简介</p>
+                    <input type="text" v-model="introduce">
                 </li>
                 <li class=timer>
                     <h5>注册时间</h5>
-                    <p>2017-3-2</p>
+                    <input type="text" v-model="registDate">
                 </li>
             </ul>
         </div>
@@ -31,23 +31,23 @@
             <ul>
                 <li>
                     <h5>性别</h5>
-                    <p>女</p>
+                    <input type="text" v-model="user_sex">
                 </li>
                 <li>
                     <h5>生日</h5>
-                    <p>2001-2-5</p>
+                   <input type="text" v-model="birth_date">
                 </li>
                 <li class="address">
                     <h5>所在地</h5>
-                    <p>陕西</p>
+                    <input type="text" v-model="home">
                 </li>
                  <li>
                     <h5>公司</h5>
-                    <p>我是公司</p>
+                    <input type="text" v-model="conpany">
                 </li>
                  <li>
-                    <h5>高中</h5>
-                    <p>西柚</p>
+                    <h5>姓名</h5>
+                    <input type="text" v-model="sch_name">
                 </li>
             </ul>
         </div>
@@ -60,9 +60,44 @@ export default {
   name: '',
   data () {
     return {
-      msg: ''
+            nick_name:"素团子",
+            introduce:"我是简介",
+            registDate:"1965-2-26",
+            user_sex:'女',
+            birth_date:'1965-2-1',
+            home:'河北邢台',
+            conpany:'中国国家京剧院',
+            sch_name:'lisusudemimi'
     }
-  }
+  },
+ methods:{
+     getInfor(){
+         this.$http.post('center/center?user=1',{}).then(result=>{
+             if(result.body.status==1){
+                var obj = result.body.object;
+                this.nick_name = obj.nick_name;
+                this.introduce = obj.introduce; 
+                this.registDate=obj.registDate;
+                this.user_sex=obj.user_sex;
+                this.birth_date=obj.birth_date;
+                this.home=obj.home;
+                this.conpany=obj.conpany;
+                this.sch_name=obj.sch_name;    
+             }
+         })
+     },
+     postInfor(){
+         this.$http.post('user/center/updata?user=1',{'nick_name':this.nick_name,'introduce':this.introduce,'registDate':this.registDate,'user_sex':this.registDate,'birth_date':this.birth_date,'home':this.home,'conpany':this.conpany,'sch_name':this.sch_name}).then(result=>{
+             if(result.body.status==1){
+                 alert('保存成功');
+             }
+         })
+     }
+ },
+ created(){
+     this.getInfor();
+     this.postInfor();
+ }
 }
 </script>
 
@@ -113,15 +148,17 @@ export default {
     font-size:22px;
     display:inline-block;
 }
-.content1 p,.content2 p{
+.content1 input,.content2 input{
     font-size:22px;
-    display:inline-block;
     padding-left:28%;
+    display: inline-block;
+    border:none;
+    width:70%;
 }
-.content1 .timer p{
+.content1 .timer input{
     padding-left:16%;
 }
-.content2 .address p{
+.content2 .address input{
     padding-left:21%;
 }
 </style>

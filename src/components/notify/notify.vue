@@ -24,7 +24,7 @@
           <input type="button" value="已全部加载完成" v-show="flag2" id="btn" disabled>
         </ul>
       </div>
-      <nav class="mui-bar mui-bar-tab">
+      <!-- <nav class="mui-bar mui-bar-tab">
         <router-link class="mui-tab-item-mr" to="/home">
           <span class="mui-icon mui-icon-home"></span>
           <span class="mui-tab-label">首页</span>
@@ -47,10 +47,12 @@
           <span class="mui-icon mui-icon-person"></span>
           <span class="mui-tab-label">我</span>
         </router-link>
-      </nav>
+      </nav> -->
+      <v-footer :childmsg="num"></v-footer>
     </div>
 </template>
 <script>
+import footer from '../footer/footer.vue';
 export default {
   name: 'notify',
   data () {
@@ -59,11 +61,15 @@ export default {
       flag2:false,
       count:1,
       newlist:[],
-      list:[]
+      list:[],
+      num:0
     }
   },
   created(){
     this.getInfo();
+  },
+  components:{
+    'v-footer':footer
   },
   methods:{
     showmore(){
@@ -74,7 +80,7 @@ export default {
         for(var i=(this.count-1)*5;i<this.count*5&&i<this.list.length;i++){
           this.newlist.push(this.list[i])
         }
-        if(i==this.list.length){
+        if(i==this.list.length||i==0){
           this.flag1=false;
           this.flag2=true;
         }
@@ -82,6 +88,7 @@ export default {
     getInfo(){
       this.$http.get('user/massage').then(result=>{
         if(result.body.status==1){
+          this.num=result.body.object.length;
           this.list=result.body.object;
           this.makelist(this.count,this.list);
         }
@@ -172,48 +179,48 @@ header p{
   left:20%;
   bottom: 2vh;
 }
-.mui-bar {
-  background-color: #fafafa;
-  height: 8vh;
-  bottom: -1px;
-}
-.mui-bar-tab .mui-tab-item-mr.router-link-active {
-    color: #2b2b2b;
-}
-.mui-bar-tab .mui-tab-item-mr {
-    display: table-cell;
-    overflow: hidden;
-    width: 1%;
-    height: 50px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #939393;
-}
-.mui-bar-tab .mui-tab-item-pb {
-    display: table-cell;
-    overflow: hidden;
-    width: 1%;
-    height: 50px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #fff;
-    background: #ff8200;
-}
-.mui-bar-tab .mui-tab-item-mr .mui-icon {
-    top: 3px;
-    width: 24px;
-    height: 24px;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-.mui-bar-tab .mui-tab-item-mr .mui-icon ~ .mui-tab-label {
-    font-size: 11px;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+// .mui-bar {
+//   background-color: #fafafa;
+//   height: 8vh;
+//   bottom: -1px;
+// }
+// .mui-bar-tab .mui-tab-item-mr.router-link-active {
+//     color: #2b2b2b;
+// }
+// .mui-bar-tab .mui-tab-item-mr {
+//     display: table-cell;
+//     overflow: hidden;
+//     width: 1%;
+//     height: 50px;
+//     text-align: center;
+//     vertical-align: middle;
+//     white-space: nowrap;
+//     text-overflow: ellipsis;
+//     color: #939393;
+// }
+// .mui-bar-tab .mui-tab-item-pb {
+//     display: table-cell;
+//     overflow: hidden;
+//     width: 1%;
+//     height: 50px;
+//     text-align: center;
+//     vertical-align: middle;
+//     white-space: nowrap;
+//     text-overflow: ellipsis;
+//     color: #fff;
+//     background: #ff8200;
+// }
+// .mui-bar-tab .mui-tab-item-mr .mui-icon {
+//     top: 3px;
+//     width: 24px;
+//     height: 24px;
+//     padding-top: 0;
+//     padding-bottom: 0;
+// }
+// .mui-bar-tab .mui-tab-item-mr .mui-icon ~ .mui-tab-label {
+//     font-size: 11px;
+//     display: block;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//}
 </style>

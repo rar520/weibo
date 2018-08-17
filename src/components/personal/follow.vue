@@ -6,7 +6,11 @@
       <h2>关注</h2>
     </div>
     <div class="content">
-      <div class="clearfix">
+      <router-link class="clearfix" v-for="(item,i) in followData" :key="i" tag="div" to="personalId"> 
+        <img src="../../../static/img/head.png">
+        <h4>{{item.nickName}}</h4>
+      </router-link>
+      <!-- <div>
         <img src="../../../static/img/head.png">
         <h4>郎平</h4>
         <span>中国女排，广州恒大...</span>
@@ -35,13 +39,7 @@
         <h4>郎平</h4>
         <span>中国女排，广州恒大...</span>
         <p>从5月15日到7月1日...</p>
-      </div>
-      <div>
-        <img src="../../../static/img/head.png">
-        <h4>郎平</h4>
-        <span>中国女排，广州恒大...</span>
-        <p>从5月15日到7月1日...</p>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -51,8 +49,28 @@ export default {
   name: '',
   data () {
     return {
-      msg: ''
+      msg: '',
+      followData:[{
+        nickName:"素团子"
+      },
+      {
+        nickName:"狗欢欢"
+      }
+      ]
     }
+  },
+  methods:{
+    getInfor(){
+      this.$http.get('user/focus/select').then(result=>{
+        if(result.body.status==1){
+          this.followData=result.body.object;
+        }
+        colsole.log(result.body);
+      })
+    }
+  },
+  created(){
+    this.getInfor();
   }
 }
 </script>
@@ -109,7 +127,7 @@ export default {
     padding-right:5%;
   }
   .content div h4{
-    font-size:23px;
+    font-size:28px;
     position:absolute;
     left:45%;
     top:20%;

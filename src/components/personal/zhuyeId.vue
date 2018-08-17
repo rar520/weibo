@@ -21,9 +21,9 @@
                     <h5>注册时间</h5>
                     <span>{{registDate}}</span>
                 </li>
-                <li>
+                <!-- <li>
                     <router-link to="/data" tag="a"><h4>更新基本资料，方便大家了解你</h4></router-link>
-                </li>
+                </li> -->
             </ul>
     </div>
 </template>
@@ -41,7 +41,7 @@ export default Vue.extend({
     },
     methods:{
         getInfor(){
-            this.$http.get('user/center/center').then(result=>{
+            this.$http.get('center/center?user=1').then(result=>{
                 if(result.body.status==1){
                     var obj = result.body.object;
                     this.user_sex=obj.user_sex;
@@ -97,4 +97,3 @@ export default Vue.extend({
         font-size:20px;
     }
 </style>
-

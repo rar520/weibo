@@ -14,6 +14,8 @@ import CommentInfo from '@/components/content/commentinfo.vue'
 
 import notify from '@/components/notify/notify.vue'
 
+import footer from '@/components/footer/footer.vue'
+
 import search from '@/components/search/search.vue'
 import bill from '@/components/search/bill.vue'
 import searchpage from '@/components/search/searchpage.vue'
@@ -115,6 +117,11 @@ export default new Router({
       path: '/data',
       name: 'data',
       component: Data
+    },
+    {
+      path:'/footer',
+      name:'footer',
+      component:footer
     }
   ]
 })

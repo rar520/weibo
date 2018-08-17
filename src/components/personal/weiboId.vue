@@ -79,7 +79,7 @@ export default Vue.extend({
     },
     methods:{
         getAttentionData() {
-                this.$http.get('user/myweibo').then(result=> {
+                this.$http.get('myweiboonid').then(result=> {
                     if(result.body.status==1){
                         this.weibodata=result.body.object
                     }
@@ -218,4 +218,3 @@ export default Vue.extend({
         -webkit-font-smoothing: antialiased;
         }
 </style>
-

@@ -2,7 +2,7 @@
     <div class="follow">
         <div class="header clearfix">
             <span class="mui-icon mui-icon-arrowleft"></span>
-            <router-link to="home" tag="a"><span class="me">我</span></router-link>
+            <a @click="goback"><span class="me">我</span></a>
             <img src="../../../static/img/header.png">
             <p class="name">{{userInfor.nickName}}</p>
             <router-link to="follow" tag="a"><p class="foc">关注<span>{{fOllow}}</span></p></router-link>
@@ -19,8 +19,8 @@
 </template>
 <script>
 import Vue from 'vue'
-import Zhuye from './zhuye.vue'
-import Weibo from './weibo.vue'
+import Zhuye from './zhuyeId.vue'
+import Weibo from './weiboId.vue'
 export default Vue.extend({
     data () {
         return {
@@ -41,11 +41,14 @@ export default Vue.extend({
         }
     },
     methods : {
+        goback(){
+            this.$router.go(-1)
+        },
         toggle(arg) {
             this.currentView=arg;
         },
         getInto(){
-            this.$http.get('user/center/center').then(result=>{
+            this.$http.get('center/center?user=1').then(result=>{
                 if(result.body.status==1){
                    //var obj = reslut.body.object; 
                    this.userInfor = result.body.object;
@@ -54,14 +57,14 @@ export default Vue.extend({
             })
         },
         getFans(){
-            this.$http.get('user/focus/fanscount').then(result=>{
+            this.$http.get('focus/fanscount').then(result=>{
                 if(result.body.status==1){
                     this.fAns=reslut.body.object;
                 }
             })
         },
         getFollow(){
-            this.$http.get('user/focus/focuscount').then(result=>{
+            this.$http.get('focus/focuscount').then(result=>{
                 if(result.body.status==1){
                     this.fOllow=reslut.body.object;
         }
