@@ -22,11 +22,11 @@ import App from './App'
 import Mint from 'mint-ui'
 Vue.use(Mint)
 // 导入Mint中的样式
-import 'mint-ui/lib/style.css'
+import "mint-ui/lib/style.css"
 // 导入MUI的样式
-import '../static/mui/css/mui.css'
+import "../static/mui/css/mui.css"
 // 导入MUI中拓展字体的图标样式
-import '../static/mui/css/icons-extra.css'
+import "../static/mui/css/icons-extra.css"
 // 导入v-router包
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
@@ -53,11 +53,11 @@ Vue.filter('dataFormat',function(data,pattern='YYYY-MM-DD HH:mm'){
 })
 
 
-import '../static/mui/css/mui.css'
-import '../static/mui/css/icons-extra.css'
-import '../static/css/common.css'
+import "../static/mui/css/mui.css"
+import "../static/mui/css/icons-extra.css"
+import "../static/css/common.css"
 
-import '../static/js/jquery.min.js'
+import "../static/js/jquery.min.js"
 
 Vue.config.productionTip = false;
 
