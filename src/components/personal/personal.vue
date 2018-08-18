@@ -3,6 +3,7 @@
         <div class="header clearfix">
             <span class="mui-icon mui-icon-arrowleft"></span>
             <router-link to="home" tag="a"><span class="me">我</span></router-link>
+            <input type="button" @click="out" value="退出登录">
             <img src="../../../static/img/header.png">
             <p class="name">{{userInfor.nickName}}</p>
             <router-link to="follow" tag="a"><p class="foc">关注<span>{{fOllow}}</span></p></router-link>
@@ -67,6 +68,10 @@ export default Vue.extend({
                     this.fOllow=reslut.body.object;
         }
         })
+        },
+        out(){
+            localStorage.removeItem('userid')
+            this.$router.push("/before_login");
         }
     },
     created(){

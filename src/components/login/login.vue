@@ -29,13 +29,14 @@ export default {
         }
         else{
           // 把帐户名和密码 发送给后台
-          this.$http.post('http://192.168.0.108:8080/check',{
+          this.$http.post('check',{
             'userid':this.userid,'password':this.password
           })
           .then(function (result) {
             if(result.body.status == 1){
               console.log(result.body.status);
               this.$router.push('/home');
+              localStorage.setItem('userid',JSON.stringify(this.userid))
             }
             else{
               console.log(result.body.status);

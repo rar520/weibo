@@ -19,10 +19,10 @@
           </span>
           <span class="mui-tab-label">发现</span>
         </router-link>
-        <router-link class="mui-tab-item-mr" to="/personal">
+        <div class="mui-tab-item-mr" @click="personal(userid)">
           <span class="mui-icon mui-icon-person"></span>
           <span class="mui-tab-label">我</span>
-        </router-link>
+        </div>
       </nav>
     </div>
 </template>
@@ -34,13 +34,27 @@ export default {
     },
     data(){
         return{
-           
+           userid : ''
         }
     },
     create(){
        
     },
     methods:{
+        personal(userid) {
+            if(userid==null) {
+                this.$router.push('before_login')
+            }else{
+                this.$router.push('personal')
+            } 
+        },
+        getuserid() {
+            this.userid=localStorage.getItem('userid')
+            console.log(this.userid)
+        }
+    },
+    created() {
+        this.getuserid();
     }
 }
 </script>

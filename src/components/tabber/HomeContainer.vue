@@ -43,7 +43,8 @@ export default {
         // useriddata : [],
         // weiboiddata : [],
         // weibolikedata : []
-        num:0
+        num:0,
+        userid : ''
     }
   },
   components:{
@@ -99,11 +100,16 @@ export default {
           this.num=result.body.object.length;
         }
       })
+    },
+    getuserid() {
+      this.userid=this.$route.params
+      console.log(this.userid)
     }
   },
   created () {
     this.getAttentionData();
     this.getInfo();
+    this.getuserid();
   }
 }
 </script>

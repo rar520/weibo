@@ -3,7 +3,9 @@
         <header>
             <p>正在编辑</p>
             <p id="nickname"></p>
-            <span>返回</span>
+            <router-link to="/home">
+                <span>返回</span>
+            </router-link>
             <div @click="postWeiboContent">
                 发送
             </div>
@@ -15,9 +17,14 @@
                     <ul class="clearfix">
                         <li>
                             <span class="mui-icon mui-icon-image">
-                                <input type="file" id="file" 
-                                accept="image/*" @change="imgChange"/>
+                                <form method="post" action="http://192.168.0.108:8080/user/publish/upload" enctype="mulitipart/form-data">
+                                    <!-- <input type="file" id="file" accept="image/*" @change="imgChange"/> -->
+                                    <input type="file" name="mulitipartFile" id="file" accept="image/*" @change="imgChange"/>
+                                    <input type="submit" />
+                                </form>
                             </span>
+                            <img src="../../../static/img/origin_head.png" 
+                            width="60px" height="60px" id="imghead" />
                         </li>
                         <li>
                             <span class="mui-icon mui-icon-plusempty"></span>
@@ -53,25 +60,28 @@ export default{
                 })
             }
         },
-        // getPic(){
-        //     var  file_obj = document.getElementById("file");
-        //         var files = file_obj.files;
-        //         if(undefined == file){
-        //             return ;
-        //         }
-        //         var r = new FileReader(); 
-        //         r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
-        //         r.onload = function(e) {
-        //             var base64 = e.target.result;
-        //             console.log(base64);
-        //             img.setAttribute('src',base64);
-        //         }
-        // }   
+        imgChange() {
+                var  file_obj = document.getElementById("file");
+                var img =document.getElementById('imghead');
+                var file = file_obj.files[0];
+                if(undefined == file){
+                    return ;
+                }
+                var r = new FileReader(); 
+                r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
+                r.onload = function(e) {
+                    var base64 = e.target.result;
+                    console.log(base64);
+                    img.setAttribute('src',base64);
+                    this.headimage = base64;
+                }
+        }
     },
     created(){
         //获取昵称
         this.$http.get('user/publish/nickname').then((result)=>{
             var nickname = document.getElementById('nickname');
+            console.log(result.body.object)
             nickname.innerHTML = result.body.object;
         })
     } 

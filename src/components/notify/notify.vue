@@ -8,11 +8,11 @@
       <div class="content">
         <ul>
           <li v-for="(item,i) in newlist" :key="i">
-            <router-link to="'/home/content'+item.WeiBo_id">
+            <router-link :to="'/home/content/'+item.WeiBo_id">
               <div class="up">
-                <div><router-link to="'/personalId'+item.commentuser_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
+                <div><router-link :to="'/personalId/'+item.commentuser_id"><img src="../../../static/img/imgone.jpg"></router-link></div>
                 <div>
-                  <p><router-link to="'/personalId'+item.commentuser_id"><span>{{item.nick_name}}</span></router-link>评论了你的微博</p>
+                  <p><router-link :to="'/personalId/'+item.commentuser_id"><span>{{item.nick_name}}</span></router-link>评论了你的微博</p>
                   <p>{{item.comment_content.substring(0,15)}}</p>
                 </div>
                 <div>{{item.weibo_content.substring(0,20)}}</div>
