@@ -14,12 +14,12 @@
             <textarea placeholder="分享我的故事......" maxlength="160" v-model="weiboContent"></textarea>
             <div class="input">
                 <div class="export">
-                    <span class="mui-icon mui-icon-image">
                         <form method="post" action="localhost:80/user/publish/upload" enctype="multipart/form-data">
-                            <input type="file" name="files" id="file"/>
+                          
+                                <input type="file" name="files" id="file"/>
+                         
                             <input type="submit" id="submit"/>
                         </form>
-                    </span>
                 </div>
             </div>
         </main>
