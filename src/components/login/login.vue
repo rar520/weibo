@@ -43,10 +43,6 @@ export default {
               return Toast("您登录的未注册！");
             }
           });
-          // .catch(function (error) {
-          //   console.log("error");
-          // })
-          
         }
       }
   },

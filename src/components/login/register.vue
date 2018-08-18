@@ -1,52 +1,19 @@
 <template>
     <div>
+        <h1>请输入账号和密码</h1> 
         <router-link to="before_login">
             <span class="mui-icon mui-icon-closeempty"></span>
         </router-link>
-        <div class="head_img">
-             <img id="imghead" src="../../../static/img/origin_head.png" width="55px" height="55px" /> 
-        </div>
-        <!-- 选择头像 -->
-        <!-- <form id="form1" method="post" action="http://192.168.0.108:8080/picsend" enctype="multipart/form-data">
-            <div class="file_div">选择头像
-                <input type="file" name="multipartFile" id="file" value="选择头像" accept="image/*" @change="imgChange"/>
-            </div>
-            <input type="submit" @click="picMethod"/>
-        </form>
         <form action="">
             <input type="text" placeholder="请输入账号" v-model="nickname" @blur="blurNickName" v-focus/>
             <input type="password" placeholder="请输入密码" v-model="password" @blur="blurPassword" />
             <input type="password" placeholder="请确认密码" v-model="pass_define" />
-            <input type="submit" id="register" value="注册" @click="postRegister($event)" />
-        </form> -->
-            <div class="file_div">选择头像
-                <input type="file" name="multipartFile" id="file" value="选择头像" accept="image/*" @change="add_img"/>
-            </div>
-
-        <form action="">
-            <input type="text" placeholder="请输入账号" v-model="nickname" @blur="blurNickName" v-focus/>
-            <input type="password" placeholder="请输入密码" v-model="password" @blur="blurPassword" />
-            <input type="password" placeholder="请确认密码" v-model="pass_define" />
-            <input type="submit" id="register" value="注册" @click="postRegister($event)" />
+            <input type="submit" id="register" value="注册" @click="postRegister" />
         </form>
-        <!-- <form ction="http://47.106.12.97:80/sagas/picsend" method="post" enctype="multipart/form-data" target="target">
-            <div class="file_div">选择头像
-                <input type="file" name="multipartFile" id="file" value="选择头像" accept="image/*" @change="imgChange"/>
-            </div>
-            <input type="submit"/>
-        </form>
-        <iframe name="target" id="target"></iframe> --> 
-        <!-- <form action="">
-            <div class="file_div">选择头像
-                <input type="file" name="multipartFile" id="file" value="选择头像" accept="image/*" @change="imgChange"/>
-            </div>
-            <input type="button" @click="postPic" />
-        </form> -->
     </div>
 </template>
 
 <script>
-// import '../../../static/js/jquery.min.js';
 import { Toast } from "mint-ui";
 export default{
     name: 'register',
@@ -54,31 +21,18 @@ export default{
         return{
             nickname:'',
             password:'',
-            pass_define:'',
-            headimage:''
+            pass_define:''
         }
     },
     methods:{
-        postRegister(event){
-            event.preventDefault();
-            let formData = new FormData();
-            formData.append('nickname', this.nickname);
-            formData.append('password', this.password);
-            formData.append('headimage', this.headimage);
- 
-            let config = {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            }
-            
+        postRegister(){
             if(this.nickname.trim().length === 0 || this.password.trim().length ===0 ){
                 return Toast("账户名密码不能为空！");
             }else if(this.password != this.pass_define){
                 this.pass_define = "";
                 return Toast("确认密码不符，请重新输入！");
             }else{
-                this.$http.post('doregist', formData,config)
+                this.$http.post('doregist', {'nickname':this.nickname,'password':this.password})
                 .then(function (result) {
                 if(result.body.status == 1){
                     var returnObj = result.body.object;
@@ -98,7 +52,7 @@ export default{
             }
             else{
                 //检查昵称是否唯一
-                this.$http.post('http://192.168.0.108:8080/checknick',{'nickname':this.nickname})
+                this.$http.post('checknick',{'nickname':this.nickname})
                 .then((result) => {
                     if(result.body.status != 1){
                         this.nickname = '';
@@ -115,52 +69,6 @@ export default{
                 this.password = "";
                 return Toast("请输入6-10为数字字母下划线密码！");
             }
-        },
-        // imgChange() {
-        //         var  file_obj = document.getElementById("file");
-        //         var img =document.getElementById('imghead');
-        //         var file = file_obj.files[0];
-        //         if(undefined == file){
-        //             return ;
-        //         }
-        //         var r = new FileReader(); 
-        //         r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
-        //         r.onload = function(e) {
-        //             var base64 = e.target.result;
-        //             console.log(base64);
-        //             img.setAttribute('src',base64);
-        //             this.headimage = base64;
-        //         }
-        // }
-        add_img(event){    
-                    let reader =new FileReader();  
-                    let img1=event.target.files[0];  
-                    let type=img1.type;//文件的类型，判断是否是图片  
-                    let size=img1.size;//文件的大小，判断图片的大小  
-                    if(this.imgData.accept.indexOf(type) == -1){  
-                        alert('请选择我们支持的图片格式！');  
-                        return false;  
-                    }  
-                    if(size>3145728){  
-                        alert('请选择3M以内的图片！');  
-                        return false;  
-                    }  
-                    var uri = ''  
-                    let form = new FormData();   
-                    form.append('file',img1,img1.name);  
-                    this.$http.post('http://192.168.0.108:8080/picsend',form,{  
-                        headers:{'Content-Type':'multipart/form-data'}  
-                    }).then(response => {  
-                        console.log(response.data)  
-                        uri = response.data.url  
-                        reader.readAsDataURL(img1);  
-                        var that=this;  
-                        reader.onloadend=function(){  
-                            that.imgs.push(uri);  
-                        }  
-                    }).catch(error => {  
-                        alert('上传图片出错！');  
-                    })      
         }
     },
     directives:{
@@ -183,6 +91,13 @@ span:nth-of-type(1){
     top: 6vh;
     left: 4%;
 }
+h1{
+    font-family:楷体;
+    font-size:30px;
+    line-height:10vh;
+    margin-bottom:6vh;
+    margin-left:10%;
+  }
   input{
     width: 80%;
     height: 8vh;

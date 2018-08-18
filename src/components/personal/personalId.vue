@@ -200,6 +200,7 @@ export default Vue.extend({
     .guanzhu {
         position: absolute;
         right: 6%;
+        top: 6%;
         width: 66px;
         height: 28px;
         text-align: center;

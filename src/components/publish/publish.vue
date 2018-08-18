@@ -14,22 +14,12 @@
             <textarea placeholder="分享我的故事......" maxlength="160" v-model="weiboContent"></textarea>
             <div class="input">
                 <div class="export">
-                    <ul class="clearfix">
-                        <li>
-                            <span class="mui-icon mui-icon-image">
-                                <form method="post" action="http://47.106.12.97:80/sagas/user/publish/upload" enctype="multipart/form-data">
-                                    <!-- <input type="file" id="file" accept="image/*" @change="imgChange"/> -->
-                                    <input type="file" name="files" id="file"/>
-                                    <input type="submit" />
-                                </form>
-                            </span>
-                            <img src="../../../static/img/origin_head.png" 
-                            width="60px" height="60px" id="imghead" />
-                        </li>
-                        <li>
-                            <span class="mui-icon mui-icon-plusempty"></span>
-                        </li>
-                    </ul>
+                    <span class="mui-icon mui-icon-image">
+                        <form method="post" action="localhost:80/user/publish/upload" enctype="multipart/form-data">
+                            <input type="file" name="files" id="file"/>
+                            <input type="submit" id="submit"/>
+                        </form>
+                    </span>
                 </div>
             </div>
         </main>
@@ -60,22 +50,6 @@ export default{
                 })
             }
         }
-    //     imgChange() {
-    //             var  file_obj = document.getElementById("file");
-    //             var img =document.getElementById('imghead');
-    //             var file = file_obj.files[0];
-    //             if(undefined == file){
-    //                 return ;
-    //             }
-    //             var r = new FileReader(); 
-    //             r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
-    //             r.onload = function(e) {
-    //                 var base64 = e.target.result;
-    //                 console.log(base64);
-    //                 img.setAttribute('src',base64);
-    //                 this.headimage = base64;
-    //             }
-    //     }
     },
     created(){
         //获取昵称
@@ -137,18 +111,11 @@ header p:nth-of-type(2){
     border-top:1px #e5e5e5 solid;
     height:7vh;
     background-color:#f9f9f9;
+    position:relative;
  }
- main .input .export ul li{
-    width:25%;
-    float:left;
-    padding-top:2vh;
-    text-align:center;
- }
- main .input .export ul li span{
-    font-size:25px;
- }
- main .input .export ul li:nth-of-type(4) span{
-    border-radius:50%;
-    border:1px #949494 solid;
+ #submit{
+     position:absolute;
+     right:5%;
+     top:1vh;
  }
 </style>

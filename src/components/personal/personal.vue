@@ -3,7 +3,7 @@
         <div class="header clearfix">
             <span class="mui-icon mui-icon-arrowleft"></span>
             <router-link to="home" tag="a"><span class="me">我</span></router-link>
-            <input type="button" @click="out" value="退出登录">
+            <input type="button" id="btn" @click="out" value="退出登录">
             <img src="../../../static/img/header.png">
             <p class="name">{{userInfor.nickName}}</p>
             <router-link to="follow" tag="a"><p class="foc">关注<span>{{fOllow}}</span></p></router-link>
@@ -88,6 +88,12 @@ export default Vue.extend({
 })
 </script>
 <style  scoped>
+    #btn{
+        position: absolute;
+        right: 0;
+        top:1vh;
+        opacity: 0.5;
+    }
     .follow{
         width:100%;
     }
