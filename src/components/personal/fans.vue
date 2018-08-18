@@ -6,10 +6,42 @@
       <h2>粉丝</h2>
     </div>
     <div class="content">
-      <router-link class="clearfix" v-for="(item,i) in fansData" :key="i" tag="div" to="'personalId'+item.user_id">
+      <router-link class="clearfix" v-for="(item,i) in fansData" :key="i" tag="div" to="'personalId/'+item.user_id">
         <img src="../../../static/img/head.png">
         <h4>{{item.nickName}}</h4>
+        <!-- <span>中国女排，广州恒大...</span>
+        <p>从5月15日到7月1日...</p> -->
       </router-link>
+      <!-- <div>
+        <img src="../../../static/img/head.png">
+        <h4>郎平</h4>
+        <span>中国女排，广州恒大...</span>
+        <p>从5月15日到7月1日...</p>
+      </div>
+      <div>
+        <img src="../../../static/img/head.png">
+        <h4>郎平</h4>
+        <span>中国女排，广州恒大...</span>
+        <p>从5月15日到7月1日...</p>
+      </div>
+      <div>
+        <img src="../../../static/img/head.png">
+        <h4>郎平</h4>
+        <span>中国女排，广州恒大...</span>
+        <p>从5月15日到7月1日...</p>
+      </div>
+      <div>
+        <img src="../../../static/img/head.png">
+        <h4>郎平</h4>
+        <span>中国女排，广州恒大...</span>
+        <p>从5月15日到7月1日...</p>
+      </div>
+      <div>
+        <img src="../../../static/img/head.png">
+        <h4>郎平</h4>
+        <span>中国女排，广州恒大...</span>
+        <p>从5月15日到7月1日...</p>
+      </div> -->
     </div>
   </div>
 </template>
@@ -21,7 +53,14 @@ export default {
     return {
       msg: '',
       // fansData:[],
-      fansData:[]
+      fansData:[
+        {
+        nickName:"素团子"
+        },
+        {
+          nickName:"胡新"
+        }
+      ]
     }
   },
   methods:{

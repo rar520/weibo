@@ -3,11 +3,12 @@
         <div class="header clearfix">
             <span class="mui-icon mui-icon-arrowleft"></span>
             <a @click="goback"><span class="me">我</span></a>
+            <div class="guanzhu" id="guanzhu" @click="toggleguanzhu">{{msg}}</div>
             <img src="../../../static/img/header.png">
             <p class="name">{{userInfor.nickName}}</p>
             <router-link to="follow" tag="a"><p class="foc">关注<span>{{fOllow}}</span></p></router-link>
             <router-link to="fans" tag="a"><p class="fans">粉丝<span>{{fAns}}</span></p></router-link>
-            <p class="introduce">{{introduce}}</p>
+            <p class="introduce"></p>
         </div>
         <div class="title clearfix">
             <span class="span1" v-for="(item,index) in list" :key="index" :class="{actived:isactived==index}" @click="isactived=index,toggle('tab'+(index+1))">{{item.title}}</span>
@@ -32,12 +33,13 @@ export default Vue.extend({
             //用来保存组件的name
             currentView : 'tab1',
 
-            nickName:'',
-            fAns:'',
-            fOllow:'',
-            introduce:'',
-            userInfor:{
-            }
+            nickName:'素团子',
+            fAns:'2',
+            fOllow:'2',
+            userInfor:{},
+            flag : false,
+            msg:'关注',
+            userid:this.$route.params.id,
             
         }
     },
@@ -49,7 +51,7 @@ export default Vue.extend({
             this.currentView=arg;
         },
         getInto(){
-            this.$http.get('center/center?user=1').then(result=>{
+            this.$http.get('center/center?user=this.userid').then(result=>{
                 if(result.body.status==1){
                    //var obj = reslut.body.object; 
                    this.userInfor = result.body.object;
@@ -70,10 +72,30 @@ export default Vue.extend({
                     this.fOllow=reslut.body.object;
         }
         })
+        },
+        toggleguanzhu () {
+            if(this.flag==false){
+                this.msg="已关注";
+                this.flag=true;
+                this.$http.post('user/focus/add',{user_id:this.userid}).then(function(res){
+                    if(res.body.status==1){
+                        alert("成功关注该用户")
+                    }
+                })
+            }else{
+                this.msg="关注";
+                this.flag=false;
+                this.$http.post('user/focus/delete',{user_id:this.userid}).then(function(res){
+                    if(res.body.status==0){
+                        alert("已取消关注")
+                    }
+                })
+            }
+            
         }
     },
     created(){
-        this.getInto();
+        this.getInto()
         this.getFans();
         this.getFollow();
     },
@@ -174,5 +196,15 @@ export default Vue.extend({
     .content{
         margin-left:0%;
         margin-right:0%;
+    }
+    .guanzhu {
+        position: absolute;
+        right: 6%;
+        width: 66px;
+        height: 28px;
+        text-align: center;
+        border: 1px solid #f18c43;
+        line-height: 28px;
+        color: #f18c43;
     }
 </style>
