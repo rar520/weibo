@@ -17,9 +17,9 @@
                     <ul class="clearfix">
                         <li>
                             <span class="mui-icon mui-icon-image">
-                                <form method="post" action="http://192.168.0.108:8080/user/publish/upload" enctype="mulitipart/form-data">
+                                <form method="post" action="http://47.106.12.97:80/sagas/user/publish/upload" enctype="multipart/form-data">
                                     <!-- <input type="file" id="file" accept="image/*" @change="imgChange"/> -->
-                                    <input type="file" name="mulitipartFile" id="file" accept="image/*" @change="imgChange"/>
+                                    <input type="file" name="files" id="file"/>
                                     <input type="submit" />
                                 </form>
                             </span>
@@ -59,23 +59,23 @@ export default{
                     }
                 })
             }
-        },
-        imgChange() {
-                var  file_obj = document.getElementById("file");
-                var img =document.getElementById('imghead');
-                var file = file_obj.files[0];
-                if(undefined == file){
-                    return ;
-                }
-                var r = new FileReader(); 
-                r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
-                r.onload = function(e) {
-                    var base64 = e.target.result;
-                    console.log(base64);
-                    img.setAttribute('src',base64);
-                    this.headimage = base64;
-                }
         }
+    //     imgChange() {
+    //             var  file_obj = document.getElementById("file");
+    //             var img =document.getElementById('imghead');
+    //             var file = file_obj.files[0];
+    //             if(undefined == file){
+    //                 return ;
+    //             }
+    //             var r = new FileReader(); 
+    //             r.readAsDataURL(file);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
+    //             r.onload = function(e) {
+    //                 var base64 = e.target.result;
+    //                 console.log(base64);
+    //                 img.setAttribute('src',base64);
+    //                 this.headimage = base64;
+    //             }
+    //     }
     },
     created(){
         //获取昵称

@@ -66,10 +66,11 @@ export default Vue.extend({
             this.$http.get('user/focus/focuscount').then(result=>{
                 if(result.body.status==1){
                     this.fOllow=reslut.body.object;
-        }
-        })
+                }
+            })
         },
         out(){
+            this.$http.get('tz');
             localStorage.removeItem('userid')
             this.$router.push("/before_login");
         }

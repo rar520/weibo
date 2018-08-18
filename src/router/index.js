@@ -63,7 +63,7 @@ export default new Router({
       component: HomeContainer
     },
     {
-      path: '/home/content',
+      path: '/home/content/:id',
       name: 'TextbodyContainer',
       component: TextbodyContainer
     },
@@ -73,7 +73,7 @@ export default new Router({
       component: Comment
     },
     {
-      path: '/home/content/commentinfo',
+      path: '/home/content/commentinfo/:id',
       name: 'commentinfo',
       component: CommentInfo
     },

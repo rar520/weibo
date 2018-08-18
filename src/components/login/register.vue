@@ -7,11 +7,17 @@
              <img id="imghead" src="../../../static/img/origin_head.png" width="55px" height="55px" /> 
         </div>
         <!-- 选择头像 -->
-        <form id="form1" method="post" action="http://192.168.0.108:8080/picsend" enctype="mulitipart/form-data">
+        <!-- <form id="form1" method="post" action="http://47.106.12.97:80/sagas/picsend" enctype="multipart/form-data">
             <div class="file_div">选择头像
-                <input type="file" name="mulitipartFile" id="file" value="选择头像" accept="image/*" @change="imgChange"/>
+                <input type="file" name="multipartFile" id="file" value="选择头像" accept="image/*" @change="imgChange"/>
             </div>
             <input type="submit"/>
+        </form> -->
+        <form action="">
+            <div class="file_div">选择头像
+                <input type="file" name="multipartFile" id="file" value="选择头像" accept="image/*" @change="imgChange"/>
+            </div>
+            <input type="button" @click="postPic" />
         </form>
         <form action=''>
             <input type="text" placeholder="请输入账号" v-model="nickname" @blur="blurNickName" v-focus/>
@@ -90,6 +96,17 @@ export default{
             }else if(this.password.match(re) == null){
                 this.password = "";
                 return Toast("请输入6-10为数字字母下划线密码！");
+            }
+        },
+        postPic(){
+            var  file_obj = document.getElementById("file");
+            var pic = file_obj.files[0];
+            console.log(pic);
+            var r = new FileReader(); 
+            r.readAsDataURL(pic);      // result 为 DataURL,DataURL 是带头信息(/image) 的 base64(可能是) 编码的字符串
+            r.onload = function(e) {
+                var picture = e.target.result;
+                console.log(e.target.result);
             }
         },
         imgChange() {
