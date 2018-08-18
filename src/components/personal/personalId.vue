@@ -7,7 +7,7 @@
             <p class="name">{{userInfor.nickName}}</p>
             <router-link to="follow" tag="a"><p class="foc">关注<span>{{fOllow}}</span></p></router-link>
             <router-link to="fans" tag="a"><p class="fans">粉丝<span>{{fAns}}</span></p></router-link>
-            <p class="introduce"></p>
+            <p class="introduce">{{introduce}}</p>
         </div>
         <div class="title clearfix">
             <span class="span1" v-for="(item,index) in list" :key="index" :class="{actived:isactived==index}" @click="isactived=index,toggle('tab'+(index+1))">{{item.title}}</span>
@@ -32,9 +32,10 @@ export default Vue.extend({
             //用来保存组件的name
             currentView : 'tab1',
 
-            nickName:'素团子',
-            fAns:'2',
-            fOllow:'2',
+            nickName:'',
+            fAns:'',
+            fOllow:'',
+            introduce:'',
             userInfor:{
             }
             

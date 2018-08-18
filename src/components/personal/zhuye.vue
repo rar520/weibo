@@ -32,11 +32,11 @@ import Vue from 'vue'
 export default Vue.extend({
     data(){
         return{
-            user_sex:'女',
-            home:'河北邢台',
-            conpany:'中国国家京剧院',
-            birth_date:'1965-2-1',
-            registDate:"1965-2-26",
+            user_sex:'',
+            home:'',
+            conpany:'',
+            birth_date:'',
+            registDate:"",
         }
     },
     methods:{

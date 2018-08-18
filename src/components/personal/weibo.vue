@@ -15,42 +15,10 @@
                         {{item.wei_content}}
                     </div>
                     <div class="mui-card-footer">
-                        <router-link to="/home/content" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">{{item.commentCount}}</span></router-link>
+                        <router-link to="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">{{item.commentCount}}</span></router-link>
                         <router-link to="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like" @click="toggleClass" v-bind:class="{'actived' : likeStatus,'noactived' : !likeStatus}">{{item.likeCount}}</span></router-link>
                     </div>
             </router-link>
-                <!-- <li>
-                    <div class="massage clearfix">
-                        <img src="../../../static/img/header.png">
-                        <p class="p1">尼古拉斯赵四</p>
-                        <p class="p2">2018-7-6</p>
-                    </div>
-                    <p class="cont">我是微博内容我是微博内容我是微博内容我是微博内容
-                        我是微博内容我是微博内容我是微博内容我是微博内容
-                        我是微博内容我是微博内容我是微博内容我是微博内容我是微博内容
-                        我是微博内容我是微博内容我是微博内容我是微博内容我是微博内容
-                    </p>
-                    <div class="pinlun clearfix">
-                        <span class="mui-icon-extra mui-icon-extra-comment pin">评论</span>
-                        <span class="mui-icon-extra mui-icon-extra-like dian">点赞</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="massage clearfix">
-                        <img src="../../../static/img/header.png">
-                        <p class="p1">尼古拉斯赵四</p>
-                        <p class="p2">2018-7-6</p>
-                    </div>
-                    <p class="cont">我是微博内容我是微博内容是微博内容我是微博内容
-                        我是微博内容我是微博内容我是微博内容我是微博内容
-                        我是微博内容我是微博内容我是微博内容我是微博内容我是微博内容
-                        我是微博内容我是微博内容我是微博内容我是微博内容我是微博内容
-                    </p>
-                    <div class="pinlun clearfix">
-                        <span class="mui-icon-extra mui-icon-extra-comment pin">评论</span>
-                        <span class="mui-icon-extra mui-icon-extra-like dian">点赞</span>
-                    </div>
-                </li> -->
          </ul>
     </div>
 </template>
@@ -61,20 +29,6 @@ export default Vue.extend({
         return{
             likeStatus : false,
             weibodata : [],
-            weibodata : [
-                {
-                head_image:'../../../static/img/1.png',
-                nick_name:'胡新',
-                releasetime:'2018-08-05 17:28:10',
-                wei_content:'我最漂亮'
-                    },
-                 {
-                head_image:'../../../static/img/1.png',
-                nick_name:'素团子',
-                releasetime:'2018-08-05 17:28:10',
-                wei_content:'我最漂亮'
-                    }
-                ],
         }
     },
     methods:{
@@ -84,7 +38,7 @@ export default Vue.extend({
                         this.weibodata=result.body.object
                     }
                     console.log(result.body)
-                        })
+                })
             },
 //点赞的变化处理
         toggleClass() {

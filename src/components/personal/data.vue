@@ -2,7 +2,7 @@
     <div class="data">
         <div class="header">
             <span class="mui-icon mui-icon-arrowleft"></span>
-            <router-link to="/personal" tag="a"><span>返回</span></router-link>
+            <router-link to="/personal" tag="a"><span @click="postInfor">返回</span></router-link>
             <h3>编辑资料</h3>
         </div>
         <div class="title1">
@@ -60,19 +60,19 @@ export default {
   name: '',
   data () {
     return {
-            nick_name:"素团子",
-            introduce:"我是简介",
-            registDate:"1965-2-26",
-            user_sex:'女',
-            birth_date:'1965-2-1',
-            home:'河北邢台',
-            conpany:'中国国家京剧院',
-            sch_name:'lisusudemimi'
+            nick_name:"",
+            introduce:"",
+            registDate:"",
+            user_sex:'',
+            birth_date:'',
+            home:'',
+            conpany:'',
+            sch_name:''
     }
   },
  methods:{
      getInfor(){
-         this.$http.post('center/center?user=1',{}).then(result=>{
+         this.$http.post('center/center',{}).then(result=>{
              if(result.body.status==1){
                 var obj = result.body.object;
                 this.nick_name = obj.nick_name;
@@ -87,7 +87,7 @@ export default {
          })
      },
      postInfor(){
-         this.$http.post('user/center/updata?user=1',{'nick_name':this.nick_name,'introduce':this.introduce,'registDate':this.registDate,'user_sex':this.registDate,'birth_date':this.birth_date,'home':this.home,'conpany':this.conpany,'sch_name':this.sch_name}).then(result=>{
+         this.$http.post('user/center/updata',{'nick_name':this.nick_name,'introduce':this.introduce,'registDate':this.registDate,'user_sex':this.registDate,'birth_date':this.birth_date,'home':this.home,'conpany':this.conpany,'sch_name':this.sch_name}).then(result=>{
              if(result.body.status==1){
                  alert('保存成功');
              }
@@ -96,7 +96,6 @@ export default {
  },
  created(){
      this.getInfor();
-     this.postInfor();
  }
 }
 </script>
