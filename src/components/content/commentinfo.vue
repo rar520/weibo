@@ -31,59 +31,7 @@
         <p>{{item.comments_content}}</p>
       </div>
       <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like" @click="postcommentslike(item.user_id,item.comment_id),item.likecount++">{{item.likecount}}</span>
-      </div>
-    </div>
-    <div class="comment-commentlist">
-      <div class="comment-commentlist-image">
-        <img src="../../../static/img/touxiang1.jpg" alt="评论者">
-      </div>
-      <div class="comment-commentlist-user">
-        <h3>韩雪小姐姐</h3>
-        <span>8-2&nbsp;21:02</span>
-        <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
-      </div>
-      <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like">1997</span>
-      </div>
-    </div>
-    <div class="comment-commentlist">
-      <div class="comment-commentlist-image">
-        <img src="../../../static/img/touxiang1.jpg" alt="评论者">
-      </div>
-      <div class="comment-commentlist-user">
-        <h3>韩雪小姐姐</h3>
-        <span>8-2&nbsp;21:02</span>
-        <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
-      </div>
-      <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like">1997</span>
-      </div>
-    </div>
-    <div class="comment-commentlist">
-      <div class="comment-commentlist-image">
-        <img src="../../../static/img/touxiang1.jpg" alt="评论者">
-      </div>
-      <div class="comment-commentlist-user">
-        <h3>韩雪小姐姐</h3>
-        <span>8-2&nbsp;21:02</span>
-        <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
-      </div>
-      <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like">1997</span>
-      </div>
-    </div>
-    <div class="comment-commentlist">
-      <div class="comment-commentlist-image">
-        <img src="../../../static/img/touxiang1.jpg" alt="评论者">
-      </div>
-      <div class="comment-commentlist-user">
-        <h3>韩雪小姐姐</h3>
-        <span>8-2&nbsp;21:02</span>
-        <p>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
-      </div>
-      <div class="comment-commentlist-icon">
-        <span class="mui-icon-extra-mr mui-icon-extra-like">1997</span>
+        <span class="mui-icon-extra-mr mui-icon-extra-like" @click="postcommentslike(item.user_id,item.comment_id),select(item)" :class="{'actived' : item.selected}">{{item.likecount}}</span>
       </div>
     </div>
     <!-- 评论的评论列表区域 -->
@@ -160,9 +108,20 @@ export default {
         commentid : commentid
       }).then(result => {
         if(result.body.status==1) {
-
+          console.log("评论的评论的点赞")
         }
       })
+    },
+    select (item) {
+      console.log(item)
+      if(!item.selected) {
+         item.selected=!item.selected
+         item.likecount++
+      }
+      else {
+        item.selected=!item.selected
+        item.likecount--
+      }
     }
   }
 }
@@ -293,6 +252,9 @@ export default {
       -webkit-font-smoothing: antialiased;
       color: #929292;
   }
+  .actived {
+  color:#ff8200;
+ }
 </style>
 
 

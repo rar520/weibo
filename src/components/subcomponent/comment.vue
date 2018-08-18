@@ -18,51 +18,7 @@
           <div class="comment-list-icon">
             <span class="mui-icon-mr mui-icon-redo"></span>
             <span class="mui-icon-extra-mr mui-icon-extra-comment"></span>
-            <span class="mui-icon-extra-mr mui-icon-extra-like" @click="toggleClass(item.user_id,item.comment_id),item.likecount++" :class="{'actived' : likeStatus,'noactived' : !likeStatus}">{{item.likecount}}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="comment-list">
-      <div class="comment-list-image">
-        <img src="../../../static/img/touxiang1.jpg" alt="萌妹子">
-      </div>
-      <div class="comment-list-body">
-        <h3>张欢</h3>
-        <p>张欢的评论张欢的评论张欢的评论</p>
-        <div class="comment-list-body-content">
-          <p><span>韩雪小姐姐:</span>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
-          <p><span>吴彦祖小哥:</span>哇,你就是西邮吴彦祖啊,久仰大名!!!</p>
-          <p><span>查看总回复&nbsp;></span></p>
-        </div>
-        <div class="comment-list-time">
-          <span>7-28&nbsp;23:36</span>
-          <div class="comment-list-icon">
-            <span class="mui-icon-mr mui-icon-redo"></span>
-            <span class="mui-icon-extra-mr mui-icon-extra-comment"></span>
-            <span class="mui-icon-extra-mr mui-icon-extra-like">176</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="comment-list">
-      <div class="comment-list-image">
-        <img src="../../../static/img/touxiang1.jpg" alt="萌妹子">
-      </div>
-      <div class="comment-list-body">
-        <h3>张欢</h3>
-        <p>张欢的评论张欢的评论张欢的评论</p>
-        <div class="comment-list-body-content">
-          <p><span>韩雪小姐姐:</span>没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈没有见过如此俊俏的小哥哥哈哈哈哈哈哈哈哈</p>
-          <p><span>吴彦祖小哥:</span>哇,你就是西邮吴彦祖啊,久仰大名!!!</p>
-          <p><span>查看总回复&nbsp;></span></p>
-        </div>
-        <div class="comment-list-time">
-          <span>7-28&nbsp;23:36</span>
-          <div class="comment-list-icon">
-            <span class="mui-icon-mr mui-icon-redo"></span>
-            <span class="mui-icon-extra-mr mui-icon-extra-comment"></span>
-            <span class="mui-icon-extra-mr mui-icon-extra-like">176</span>
+            <span class="mui-icon-extra-mr mui-icon-extra-like" @click="postcommentlike(item.user_id,item.comment_id),select(item)" :class="{'actived' : item.selected}">{{item.likecount}}</span>
           </div>
         </div>
       </div>
@@ -100,9 +56,6 @@ export default {
   },
   props : ["id"],
   methods : {
-      toggleClass() {
-      this.likeStatus=!this.likeStatus
-    },
     showComment() {
       this.$http.get('comment/show?weiboid='+this.id).then(result => {
         if(result.body.status==1) {
@@ -149,14 +102,27 @@ export default {
     },
     //评论点赞
     postcommentlike(userid,commentid) {
+      console.log(userid+"yonghu")
+      console.log(commentid+"pinglun")
       this.$http.post('user/praise/comment',{
         userid : userid,
         commentid : commentid
       }).then(result => {
         if(result.body.status==1) {
-
+          console.log("评论点赞++")
         }
       })
+    },
+    select (item) {
+      console.log(item)
+      if(!item.selected) {
+         item.selected=!item.selected
+         item.likecount++
+      }
+      else {
+        item.selected=!item.selected
+        item.likecount--
+      }
     }
   },
   created () {

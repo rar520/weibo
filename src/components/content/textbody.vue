@@ -31,21 +31,10 @@
           <li v-for="(item,index) in tablist" :key="index" :class="{actived:isactived==index}" @click="isactived=index,toggle('tab'+(index+1))">
             <span>{{item.title}}&nbsp;{{item.num}}</span>
           </li>
-          <!-- <li class="actived" @click="toggle(tab02Text)">
-            <span>评论&nbsp;199</span>
-          </li>
-          <li @click="toggle(tab03Text)">
-            <span>赞&nbsp;99</span>
-          </li> -->
         </ul>
         <div id="content" class="contnet">
           <component :is='currnetView' :id="dataId" keep-alive></component>
         </div>
-        <!-- <div id="content" class="content">
-          <div>转发的列表</div>
-          <div class="actived">评论的列表</div>
-          <div>点赞的列表</div>
-        </div> -->
     </div>
     </div>
     <!-- 中间内容区域 -->
@@ -74,11 +63,6 @@ export default {
       toggle(arg) {
         this.currnetView=arg;
       },
-    // enterWeiBocontent () {
-    //   var weiboId={id : this.dataId}
-    //   this.$store.commit('showContent',weiboId)
-    // }
-    //展示一条微博的内容的方法
     showContent() {
       this.$http.get('homepage/homepage').then(result => {
         if(result.body.status==1) {

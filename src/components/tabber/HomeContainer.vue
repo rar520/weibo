@@ -22,87 +22,13 @@
           </div>
           <div class="mui-card-footer">
             <router-link :to="'/home/content/'+item.WeiBo_id" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">{{item.commentCount}}</span></router-link>
-            <router-link to="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like" @click="toggleClass(item.WeiBo_id,item.user_id,item.likeCount),addlike(),select(item)" :class="{'actived' : item.selected}">{{item.likeCount}}</span></router-link>
+            <router-link to="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like" @click="toggleClass(item.WeiBo_id,item.user_id,item.likeCount),select(item)" :class="{'actived' : item.selected}">{{item.likeCount}}</span></router-link>
           </div>
       </router-link>
-      <!-- <div class="mui-card">
-          <div class="mui-card-header mui-card-media">
-            <div class="touxiang-image">
-              <img src="../../../static/img/touxiang2.jpg" alt="大帅哥">
-            </div>
-            <div class="mui-media-body">
-              <h3>张欢</h3>
-              <p>2分钟前<span class="device">来自微博weibo.com</span></p>
-            </div>
-          </div>
-          <div class="mui-card-content">
-              我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据
-          </div>
-          <div class="mui-card-footer">
-            <a href="#" class="mui-card-link"><span class="mui-icon-mr mui-icon-redo">239</span></a>
-            <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">99</span></a>
-            <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like">99</span></a>
-          </div>
-      </div>
-      <div class="mui-card">
-          <div class="mui-card-header mui-card-media">
-            <div class="touxiang-image">
-              <img src="../../../static/img/touxiang3.jpg" alt="小帅哥">
-            </div>
-            <div class="mui-media-body">
-              <h3>张欢</h3>
-              <p>2分钟前<span class="device">来自微博weibo.com</span></p>
-            </div>
-          </div>
-          <div class="mui-card-content">
-              我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据
-          </div>
-          <div class="mui-card-footer">
-            <a href="#" class="mui-card-link"><span class="mui-icon-mr mui-icon-redo">239</span></a>
-            <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">99</span></a>
-            <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like">99</span></a>
-          </div>
-      </div>
-      <div class="mui-card">
-          <div class="mui-card-header mui-card-media">
-            <div class="touxiang-image">
-              <img src="../../../static/img/touxiang4.jpg" alt="男模">
-            </div>
-            <div class="mui-media-body">
-              <h3>张欢</h3>
-              <p>2分钟前<span class="device">来自微博weibo.com</span></p>
-            </div>
-          </div>
-          <div class="mui-card-content">
-              我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据
-          </div>
-          <div class="mui-card-footer">
-            <a href="#" class="mui-card-link"><span class="mui-icon-mr mui-icon-redo">239</span></a>
-            <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">99</span></a>
-            <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like">99</span></a>
-          </div>
-      </div>
-      <div class="mui-card">
-          <div class="mui-card-header mui-card-media">
-            <div class="touxiang-image">
-              <img src="../../../static/img/touxiang5.jpg" alt="女模">
-            </div>
-            <div class="mui-media-body">
-              <h3>张欢</h3>
-              <p>2分钟前<span class="device">来自微博weibo.com</span></p>
-            </div>
-          </div>
-          <div class="mui-card-content">
-              我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据我是后台传过来的数据
-          </div>
-          <div class="mui-card-footer">
-            <a href="#" class="mui-card-link"><span class="mui-icon-mr mui-icon-redo">239</span></a>
-            <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-comment">99</span></a>
-            <a href="#" class="mui-card-link"><span class="mui-icon-extra-mr mui-icon-extra-like">99</span></a>
-          </div>
-      </div> -->
     <!-- 中间content区域 -->
+    <!--底部Tabber区域-->
     <v-footer :childmsg='num'></v-footer>
+    <!--底部Tabber区域-->
   </div>
 </template>
 <script>
@@ -113,11 +39,11 @@ export default {
       //用来保存点赞的状态
         likeStatus : false,
         weibodata : [],
-        num : 0
         //保存用户的id
         // useriddata : [],
         // weiboiddata : [],
         // weibolikedata : []
+        num:0
     }
   },
   components:{
@@ -144,20 +70,29 @@ export default {
     },
     //点赞的变化处理
     toggleClass(weiboid,userid,likenum) {
+      console.log(userid)
+      console.log(weiboid)
       this.likeStatus=!this.likeStatus
       this.$http.post('user/praise/weibo',{
         userid : userid,
         weiboid : weiboid
       }).then(result => {
         if(result.body.status==1){
-
+          console.log("++")
         }
       })
     },
     select (item) {
       console.log(item)
-      item.selected=!item.selected
-    },    
+      if(!item.selected) {
+         item.selected=!item.selected
+         item.likeCount++
+      }
+      else {
+        item.selected=!item.selected
+        item.likeCount--
+      }
+    },
     getInfo(){
       this.$http.get('user/massage').then(result=>{
         if(result.body.status==1){
@@ -165,7 +100,6 @@ export default {
         }
       })
     }
-
   },
   created () {
     this.getAttentionData();
@@ -258,6 +192,51 @@ export default {
         text-decoration: none;
         -webkit-font-smoothing: antialiased;
   }
+}
+/* 底部区域样式 */
+.mui-bar {
+  background-color: #fafafa;
+  height: 50px;
+  bottom: -1px;
+}
+.mui-bar-tab .mui-tab-item-mr.router-link-active {
+    color: #2b2b2b;
+}
+.mui-bar-tab .mui-tab-item-mr {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #939393;
+}
+.mui-bar-tab .mui-tab-item-pb {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #fff;
+    background: #ff8200;
+}
+.mui-bar-tab .mui-tab-item-mr .mui-icon {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.mui-bar-tab .mui-tab-item-mr .mui-icon ~ .mui-tab-label {
+    font-size: 11px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>
 
