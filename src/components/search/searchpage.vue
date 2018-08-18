@@ -187,7 +187,7 @@ export default {
         this.likeStatus=!this.likeStatus
     },
     open(){
-       this.$http.post('http://192.168.0.108:8080/hot/search',{'gz':this.gz},{"emulateJSON":true}).then(result=>{
+       this.$http.post('localhost:80/hot/search',{'gz':this.gz},{"emulateJSON":true}).then(result=>{
          if(result.body.status==1){
            console.log(result.body)
            this.weibodata=result.body.object;
