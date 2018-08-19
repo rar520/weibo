@@ -36,7 +36,7 @@ import router from './router/index.js'
 //vue-resource
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
-Vue.http.options.root='http://47.106.12.97:80/sagas'
+Vue.http.options.root='sagas'
 Vue.http.options.emulateJSON=true;
 
 
