@@ -14,7 +14,7 @@
             <textarea placeholder="分享我的故事......" maxlength="160" v-model="weiboContent"></textarea>
             <div class="input">
                 <div class="export">
-                        <form method="post" action="localhost:80/user/publish/upload" enctype="multipart/form-data">
+                        <form method="post" action="http://47.106.12.97:80/sagas/user/publish/upload" enctype="multipart/form-data">
                           
                                 <input type="file" name="files" id="file"/>
                          

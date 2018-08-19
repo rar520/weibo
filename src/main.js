@@ -36,7 +36,7 @@ import router from './router/index.js'
 //vue-resource
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
-Vue.http.options.root='http://localhost:80'
+Vue.http.options.root='http://47.106.12.97:80/sagas'
 Vue.http.options.emulateJSON=true;
 
 

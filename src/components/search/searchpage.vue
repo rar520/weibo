@@ -169,7 +169,7 @@ export default {
   methods :{
      //获取所有微博的所有正文
     getAttentionData() {
-        this.$http.post('http://192.168.0.108:8080/hot/search',{"emulateJSON":true}).then(result=> {
+        this.$http.post('hot/search',{"emulateJSON":true}).then(result=> {
             if(result.body.status==1){
                 this.weibodata=result.body.object;
                 // this.weibodata.forEach(element => {
@@ -187,7 +187,7 @@ export default {
         this.likeStatus=!this.likeStatus
     },
     open(){
-       this.$http.post('localhost:80/hot/search',{'gz':this.gz},{"emulateJSON":true}).then(result=>{
+       this.$http.post('hot/search',{'gz':this.gz},{"emulateJSON":true}).then(result=>{
          if(result.body.status==1){
            console.log(result.body)
            this.weibodata=result.body.object;
