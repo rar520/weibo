@@ -7,7 +7,7 @@
             <router-link to="/searchpage" class="a"><input type="submit" value="搜索" @click="open" @focus="show"></router-link>
           </form>      
       </div>
-      <router-link v-for="item in weibodata1" :key="item.WeiBo_id" :to="'/home/content'+item.WeiBo_id" tag="div">
+      <router-link v-for="item in weibodata1" :key="item.WeiBo_id" :to="'/personal/'+item.WeiBo_id" tag="div">
       <div class="main">
           <p>相关用户</p>
           <ul>
@@ -23,7 +23,7 @@
       <div class="footer">
           <p>热门</p>
           <!-- 中间content区域 -->
-      <router-link class="mui-card" v-for="item in weibodata" :key="item.WeiBo_id" :to="'/searchpage'+item.WeiBo_id" tag="div">
+      <router-link class="mui-card" v-for="item in weibodata" :key="item.WeiBo_id" :to="'/home/content/'+item.WeiBo_id" tag="div">
           <div class="mui-card-header mui-card-media">
             <div class="touxiang-image">
               <img src="../../../static/img/1.png" alt="萌妹子">

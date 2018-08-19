@@ -98,6 +98,8 @@ export default {
       this.$http.get('user/massage').then(result=>{
         if(result.body.status==1){
           this.num=result.body.object.length;
+        }else{
+          this.num=0;
         }
       })
     },

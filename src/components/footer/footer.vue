@@ -49,7 +49,7 @@ export default {
             } 
         },
         getuserid() {
-            this.userid=localStorage.getItem('userid')
+            this.userid=localStorage.getItem('userid');
             console.log(this.userid)
         }
     },

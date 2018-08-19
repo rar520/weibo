@@ -15,9 +15,7 @@
             <div class="input">
                 <div class="export">
                         <form method="post" action="http://47.106.12.97:80/sagas/user/publish/upload" enctype="multipart/form-data">
-                          
-                                <input type="file" name="files" id="file"/>
-                         
+                            <input type="file" name="files" id="file"/>
                             <input type="submit" id="submit"/>
                         </form>
                 </div>

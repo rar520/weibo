@@ -67,10 +67,14 @@ export default {
     getInfo(){
       this.$http.get('user/massage').then(result=>{
         if(result.body.status==1){
-          this.num=result.body.object.length;
           this.list=result.body.object;
+          this.num=result.body.object.length;
           this.makelist(this.count,this.list);
+        }else{
+          console.log("无数据")
         }
+      }).catch(result=>{
+        console.log("请求数据失败")
       })
     }
   }

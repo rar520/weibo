@@ -2,7 +2,7 @@
     <div class="data">
         <div class="header">
             <span class="mui-icon mui-icon-arrowleft"></span>
-            <router-link to="/personal" tag="a"><span @click="postInfor">返回</span></router-link>
+            <router-link to="/personal" tag="a" @click="postInfor"><span>返回</span></router-link>
             <h3>编辑资料</h3>
         </div>
         <div class="title1">
@@ -72,7 +72,7 @@ export default {
   },
  methods:{
      getInfor(){
-         this.$http.post('center/center',{}).then(result=>{
+         this.$http.post('user/center/center',{}).then(result=>{
              if(result.body.status==1){
                 var obj = result.body.object;
                 this.nick_name = obj.nick_name;

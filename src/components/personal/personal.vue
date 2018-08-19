@@ -5,10 +5,10 @@
             <router-link to="home" tag="a"><span class="me">我</span></router-link>
             <input type="button" id="btn" @click="out" value="退出登录">
             <img src="../../../static/img/header.png">
-            <p class="name">{{userInfor.nickName}}</p>
+            <p class="name">{{userInfor.nick_name}}</p>
             <router-link to="follow" tag="a"><p class="foc">关注<span>{{fOllow}}</span></p></router-link>
             <router-link to="fans" tag="a"><p class="fans">粉丝<span>{{fAns}}</span></p></router-link>
-            <p class="introduce">{{introduce}}</p>
+            <p class="introduce">{{userInfor.introduce}}</p>
         </div>
         <div class="title clearfix">
             <span class="span1" v-for="(item,index) in list" :key="index" :class="{actived:isactived==index}" @click="isactived=index,toggle('tab'+(index+1))">{{item.title}}</span>
@@ -33,10 +33,8 @@ export default Vue.extend({
             //用来保存组件的name
             currentView : 'tab1',
 
-            nickName:'',
             fAns:'',
             fOllow:'',
-            introduce:'',
             userInfor:{
             }
             
@@ -58,20 +56,20 @@ export default Vue.extend({
         getFans(){
             this.$http.get('user/focus/fanscount').then(result=>{
                 if(result.body.status==1){
-                    this.fAns=reslut.body.object;
+                    this.fAns=result.body.object;
                 }
             })
         },
         getFollow(){
             this.$http.get('user/focus/focuscount').then(result=>{
                 if(result.body.status==1){
-                    this.fOllow=reslut.body.object;
+                    this.fOllow=result.body.object;
                 }
             })
         },
         out(){
             this.$http.get('tz');
-            localStorage.removeItem('userid')
+            localStorage.removeItem('userid');
             this.$router.push("/before_login");
         }
     },
