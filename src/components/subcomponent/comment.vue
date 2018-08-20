@@ -7,7 +7,7 @@
       <div class="comment-list-body">
         <h3>{{item.commentnick_name}}</h3>
         <p>{{item.comment_content}}</p>
-        <router-link :to="'/home/content/commentinfo/'+item.comment_id" class="comment-list-body-content" tag="div" :commentlistall="commentList">
+        <router-link :to="'/home/content/commentinfo/'+item.comment_id" class="comment-list-body-content" tag="div">
           <div v-for="(item,index) in commentSubList" :key="index">
             <p><span>{{item.commentsnick_name}}:</span>{{item.comments_content}}</p>
           </div>
@@ -40,8 +40,8 @@ export default {
     return {
         //评论的点赞状态
         likeStatus : false,
-        //用来保存点击微博的id值
-        // dataId : this.$route.params.id,
+       // 用来保存点击微博的id值
+        dataId : this.$route.params.id,
         //保存一条微博的信息
         weibocontent : {},
         //保存评论的所有信息
@@ -54,10 +54,9 @@ export default {
         postcommentdata : ''
     }
   },
-  props : ["id"],
   methods : {
     showComment() {
-      this.$http.get('comment/show?weiboid='+this.id).then(result => {
+      this.$http.get('comment/show?weiboid='+this.dataId).then(result => {
         if(result.body.status==1) {
           //获取评论列表的每一项得到的是数组
           this.commentList=result.body.object;
@@ -78,7 +77,7 @@ export default {
       if(this.postcommentdata.trim().length==0) {
         return Toast('评论的内容不能为空!')
       }
-      this.$http.post('user/send/comment?weiboid='+this.id,{
+      this.$http.post('user/send/comment?weiboid='+this.dataId,{
         comment_content : this.postcommentdata.trim()
       })
       .then(result => {

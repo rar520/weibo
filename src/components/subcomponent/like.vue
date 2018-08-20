@@ -14,7 +14,7 @@
        </div>
      </div>
    </div>
-      <div class="like-list">
+      <!-- <div class="like-list">
      <div class="like-list-image">
        <img src="../../../static/img/touxiang1.jpg" alt="点赞用户1">
      </div>
@@ -27,21 +27,7 @@
          <img src="../../../static/img/dianzan.jpg" alt="赞"><span>赞</span>
        </div>
      </div>
-   </div>
-      <div class="like-list">
-     <div class="like-list-image">
-       <img src="../../../static/img/touxiang1.jpg" alt="点赞用户1">
-     </div>
-     <div class="like-list-content">
-       <div class="like-list-user">
-         <h3>小小白</h3>
-         <p>一个前端的初学者</p>
-       </div>
-       <div class="icon">
-         <img src="../../../static/img/dianzan.jpg" alt="赞"><span>赞</span>
-       </div>
-     </div>
-   </div>
+   </div> -->
   </div>
 </template>
 <script>
@@ -49,15 +35,16 @@ export default {
   data () {
     return{
       likeList : [],
-      weiboId : this.$route.params.id,
       //用来保存点赞的状态
-      likeStatus : false
+      likeStatus : false,
+      // 用来保存点击微博的id值
+      dataId : this.$route.params.id
     }
   },
   methods : {
     //获取点赞列表
     getLikeList () {
-      this.$http.get('user/praise/selectpraise?weiboid='+this.weiboId)
+      this.$http.get('user/praise/selectpraise?weiboid='+this.dataId)
       .then(result => {
         if(result.body.status==1) {
           this.likeList=result.body.obj;
@@ -71,8 +58,7 @@ export default {
   },
   created () {
     this.getLikeList();
-  },
-  props : ["id"]
+  }
 }
 </script>
 <style lang="scss" scoped>

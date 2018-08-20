@@ -104,7 +104,7 @@ export default {
       })
     },
     getuserid() {
-      this.userid=this.$route.params
+      this.userid=this.$route.params.id
       console.log(this.userid)
     }
   },

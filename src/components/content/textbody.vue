@@ -33,7 +33,7 @@
           </li>
         </ul>
         <div id="content" class="contnet">
-          <component :is='currnetView' :id="dataId" keep-alive></component>
+          <component :is='currnetView' keep-alive></component>
         </div>
     </div>
     </div>
