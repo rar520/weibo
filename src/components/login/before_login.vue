@@ -19,7 +19,40 @@
                 </div>
             </div>
         </main>
-        <v-footer :childmsg='num'></v-footer>
+        <footer>
+            <ul class="clearfix">
+                <li>
+                    <router-link to="/home">
+                        <span class="mui-icon mui-icon-home"></span>
+                    </router-link>
+                    <p>微博</p>
+                </li>
+                <li>
+                    <router-link to="/notify">
+                        <span class="mui-icon mui-icon-email"></span>
+                    </router-link>
+                    <p>消息</p>
+                </li>
+                <li class="publish">
+                    <router-link to="/publish">
+                        <span class="mui-icon mui-icon-plusempty"></span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/search">
+                        <span class="mui-icon mui-icon-search"></span>
+                    </router-link>
+                    <p>发现</p>
+                </li>
+                <li>
+                    <router-link to="/personal">
+                        <span class="mui-icon mui-icon-person"></span>
+                    </router-link>
+                    <p>我</p>
+                </li>
+            </ul>
+                
+        </footer>
     </div>
 </template>
 
@@ -118,5 +151,32 @@ main .login_register div:nth-of-type(2) .login_link{
     line-height:7vh;
     color:#676464;
     margin:0 auto;
+}
+
+/* 底部 */
+footer{
+    height:9vh;
+    border-top:1px #9b9696 solid;
+}
+footer ul li{
+    text-align:center;
+    width:20%;
+    float:left;
+}
+footer ul li span{
+    font-size:38px;
+}
+footer ul li.publish span{
+    margin-top:1vh;
+    width:80%;
+    height:7vh;
+    background-color:#fe8101;
+    display:inline-block;
+    border-radius:2px;
+    font-size:48px;
+    color:#fff;
+}
+footer ul li p{
+    color:#474747;
 }
 </style>

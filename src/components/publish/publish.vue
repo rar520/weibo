@@ -2,11 +2,9 @@
     <div>
         <header>
             <p>正在编辑</p>
-            <p id="nickname"></p>
-            <router-link to="/home">
-                <span>返回</span>
-            </router-link>
-            <div @click="postWeiboContent">
+            <p>soda</p>
+            <span>返回</span>
+            <div>
                 发送
             </div>
         </header>
@@ -64,6 +62,7 @@ export default{
  header{
     width:100%;
     height:8vh;
+    /* padding-top:4vh; */
     position:relative;
     background-color:#f9f9f9;
     border-bottom:1px #d0d0d0 solid;
@@ -111,9 +110,17 @@ header p:nth-of-type(2){
     background-color:#f9f9f9;
     position:relative;
  }
- #submit{
-     position:absolute;
-     right:5%;
-     top:1vh;
+ main .input .export ul li{
+    width:25%;
+    float:left;
+    padding-top:2vh;
+    text-align:center;
+ }
+ main .input .export ul li span{
+    font-size:25px;
+ }
+ main .input .export ul li:nth-of-type(4) span{
+    border-radius:50%;
+    border:1px #949494 solid;
  }
 </style>
