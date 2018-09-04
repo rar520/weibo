@@ -19,40 +19,7 @@
                 </div>
             </div>
         </main>
-        <footer>
-            <ul class="clearfix">
-                <li>
-                    <router-link to="/home">
-                        <span class="mui-icon mui-icon-home"></span>
-                    </router-link>
-                    <p>微博</p>
-                </li>
-                <li>
-                    <router-link to="/notify">
-                        <span class="mui-icon mui-icon-email"></span>
-                    </router-link>
-                    <p>消息</p>
-                </li>
-                <li class="publish">
-                    <router-link to="/publish">
-                        <span class="mui-icon mui-icon-plusempty"></span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/search">
-                        <span class="mui-icon mui-icon-search"></span>
-                    </router-link>
-                    <p>发现</p>
-                </li>
-                <li>
-                    <router-link to="/personal">
-                        <span class="mui-icon mui-icon-person"></span>
-                    </router-link>
-                    <p>我</p>
-                </li>
-            </ul>
-                
-        </footer>
+        <v-footer :childmsg='num'></v-footer>
     </div>
 </template>
 

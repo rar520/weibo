@@ -37,7 +37,7 @@ import router from './router/index.js'
 import VueResource from 'vue-resource'
 Vue.use(VueResource);
 Vue.http.options.root='http://47.106.12.97/sagas'
-Vue.http.options.emulateJSON=true;
+Vue.http.options.credentials = true;
 
 
 //axios
